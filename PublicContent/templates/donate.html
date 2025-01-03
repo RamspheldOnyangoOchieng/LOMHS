@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donations | LOMHS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .hero-section {
+            background: url('donation-hero.jpg') no-repeat center center/cover;
+            color: #fff;
+            padding: 100px 0;
+        }
+
+        .section-heading {
+            color: #2D6619;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            background-color: #56D600;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #2D6619;
+        }
+
+        .donation-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .donation-card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Main Navigation -->
+    <header class="main-header bg-warning shadow-sm sticky-top">
+        <div class="container d-flex justify-content-between align-items-center py-2">
+          <!-- Logo -->
+          <h1 class="logo mb-0">
+            <a href="{% url 'home' %}" class="text-decoration-none text-dark fw-bold">Lean On Me</a>
+          </h1>
+      
+          <!-- Desktop Navigation -->
+          <nav class="navbar  bottom border-body d-none d-md-block">
+            <ul class="nav">
+              <li class="nav-item">
+                <a href="{% url 'home' %}#hero" class="nav-link text-dark">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'about' %}" class="nav-link text-dark">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'services' %}" class="nav-link text-dark">Our Services</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'donations' %}" class="nav-link text-dark">Donate</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'volunteer' %}" class="nav-link text-dark">Volunteer</a>
+              </li>
+            </ul>
+          </nav>
+      
+          <!-- Mobile Navigation Toggle Button -->
+<!-- Mobile Navigation Toggle Button -->
+        <button
+        id="mobile-nav-toggle"
+        class="d-md-none navbar-toggler btn btn-info p-2"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mobile-nav-menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav-menu"
+        >
+          <!-- Hamburger Icon -->
+        <span class="navbar-toggler-icon">
+            <i class="fas fa-bars text-white"></i> <!-- Font Awesome icon -->
+        </span>
+        <span class="navbar-toggler-icon" style="color: white;"></span>
+        </button>
+
+      
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-nav-menu" class="collapse d-md-none bg-light p-3 shadow-sm">
+          <ul class="list-unstyled">
+            <li>
+              <a href="{% url 'home' %}#hero" class="d-block text-dark py-2">Home</a>
+            </li>
+            <li>
+              <a href="{% url 'about' %}" class="d-block text-dark py-2">About Us</a>
+            </li>
+            <li>
+              <a href="{% url 'donations' %}" class="d-block text-dark py-2">Support Us</a>
+            </li>
+            <li>
+              <a href="{% url 'donations' %}" class="d-block text-dark py-2">Donate</a>
+            </li>
+            <li>
+              <a href="{% url 'volunteer' %}" class="d-block text-dark py-2">Volunteer</a>
+            </li>
+          </ul>
+        </nav>
+        </div>
+      </header>
+
+    <!-- Hero Section -->
+    <div class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4">Your Generosity Can Change Lives</h1>
+            <p class="lead">Join us in empowering communities, protecting the environment, and ensuring equitable healthcare for all.</p>
+            <button class="cta-button">Donate Now</button>
+        </div>
+    </div>
+
+    <!-- Why Donate Section -->
+    <section class="py-5">
+        <div class="container text-center">
+            <h2 class="section-heading">Why Your Support Matters</h2>
+            <p>At LOMHS, every contribution makes a difference. Your donation fuels life-changing initiatives, empowering communities with healthcare, equality, and sustainable solutions for a brighter, greener future.</p>
+        </div>
+    </section>
+
+    <!-- Ways to Give -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-heading">Ways to Give</h2>
+            <div class="row">
+                <!-- One-Time Donation -->
+                <div class="col-md-6 mb-4">
+                    <div class="card donation-card p-4 text-center">
+                        <h3>One-Time Donation</h3>
+                        <p>Make a single contribution to support our initiatives. Every dollar counts!</p>
+                        <button class="cta-button">Donate Once</button>
+                    </div>
+                </div>
+                <!-- Recurring Donations -->
+                <div class="col-md-6 mb-4">
+                    <div class="card donation-card p-4 text-center">
+                        <h3>Recurring Donations</h3>
+                        <p>Become a regular donor and make an ongoing impact. You can adjust or cancel anytime.</p>
+                        <button class="cta-button">Set Up Monthly Donation</button>
+                    </div>
+                </div>
+                <!-- In-Kind Donations -->
+                <div class="col-md-6 mb-4">
+                    <div class="card donation-card p-4 text-center">
+                        <h3>In-Kind Donations</h3>
+                        <p>Contribute supplies, medical equipment, seeds, or other resources needed for our programs.</p>
+                        <button class="cta-button">Contact Us for In-Kind Donations</button>
+                    </div>
+                </div>
+                <!-- Corporate Sponsorships -->
+                <div class="col-md-6 mb-4">
+                    <div class="card donation-card p-4 text-center">
+                        <h3>Corporate Sponsorships</h3>
+                        <p>Partner with us to sponsor large-scale projects or support community initiatives.</p>
+                        <button class="cta-button">Learn About Sponsorships</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Process -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center section-heading">How to Donate</h2>
+            <ol class="text-center">
+                <li>Select Your Donation Amount: Choose or enter a custom amount.</li>
+                <li>Enter Your Details: Provide your name, email, and payment information.</li>
+                <li>Submit: Confirm your donation. You’ll receive an email receipt.</li>
+            </ol>
+            <p class="text-center"><strong>Payment Methods:</strong> Credit/Debit Cards, PayPal, Bank Transfers, Mobile Payment Platforms (M-Pesa).</p>
+        </div>
+    </section>
+
+    <!-- Tax Benefits Section -->
+    <section class="py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="section-heading">Your Contributions Are Secure and Tax-Deductible</h2>
+            <p>LOMHS is a registered non-profit organization, and your donations are eligible for tax deductions. We ensure full transparency in fund allocation, and regular updates are shared with our donors.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-5">
+        <div class="container text-center">
+            <h2 class="section-heading">Have Questions About Donating?</h2>
+            <p>Email: <a href="mailto:donations@lomhs.org">donations@lomhs.org</a></p>
+            <p>Phone: +254 114300546</p>
+            <p>Address: Kisumu, Kenya</p>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,397 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Lean On Me Health and Sustainable Solutions</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        .main-header {
+            background-color: #2D6619;
+        }
+
+        .main-header .nav-link:hover {
+            color: #ED9315;
+        }
+
+        .about-hero {
+            background: #2D6619;
+        }
+
+        .mission-vision-values .card {
+            border: none;
+            background-color: #F9F9F9;
+        }
+
+        .services .service-card {
+            border-top: 4px solid #2D6619;
+        }
+
+        .leadership .card {
+            border: none;
+            background-color: #F9F9F9;
+        }
+
+        footer {
+            background-color: #2D6619;
+        }
+
+        footer a:hover {
+            color: #ED9315;
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            background-color: #ED9315;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #56D600;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero {
+                padding: 3rem 1rem;
+            }
+
+            .mission-vision-values .card,
+            .services .service-card,
+            .leadership .card {
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+     <!-- Main Navigation -->
+     <header class="main-header bg-warning shadow-sm sticky-top">
+        <div class="container d-flex justify-content-between align-items-center py-2">
+          <!-- Logo -->
+          <h1 class="logo mb-0">
+            <a href="{% url 'home' %}" class="text-decoration-none text-dark fw-bold">Lean On Me</a>
+          </h1>
+      
+          <!-- Desktop Navigation -->
+          <nav class="navbar  bottom border-body d-none d-md-block">
+            <ul class="nav">
+              <li class="nav-item">
+                <a href="{% url 'home' %}#hero" class="nav-link text-dark">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'about' %}" class="nav-link text-dark">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'services' %}" class="nav-link text-dark">Our Services</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'donations' %}" class="nav-link text-dark">Donate</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'volunteer' %}" class="nav-link text-dark">Volunteer</a>
+              </li>
+            </ul>
+          </nav>
+      
+          <!-- Mobile Navigation Toggle Button -->
+<!-- Mobile Navigation Toggle Button -->
+        <button
+        id="mobile-nav-toggle"
+        class="d-md-none navbar-toggler btn btn-info p-2"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mobile-nav-menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav-menu"
+        >
+          <!-- Hamburger Icon -->
+        <span class="navbar-toggler-icon">
+            <i class="fas fa-bars text-white"></i> <!-- Font Awesome icon -->
+        </span>
+        <span class="navbar-toggler-icon" style="color: white;"></span>
+        </button>
+
+      
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-nav-menu" class="collapse d-md-none bg-light p-3 shadow-sm">
+          <ul class="list-unstyled">
+            <li>
+              <a href="{% url 'home' %}#hero" class="d-block text-dark py-2">Home</a>
+            </li>
+            <li>
+              <a href="{% url 'about' %}" class="d-block text-dark py-2">About Us</a>
+            </li>
+            <li>
+              <a href="{% url 'donations' %}" class="d-block text-dark py-2">Support Us</a>
+            </li>
+            <li>
+              <a href="{% url 'donations' %}" class="d-block text-dark py-2">Donate</a>
+            </li>
+            <li>
+              <a href="{% url 'volunteer' %}" class="d-block text-dark py-2">Volunteer</a>
+            </li>
+          </ul>
+        </nav>
+        </div>
+      </header>
+
+<!-- Hero Section -->
+<section class="about-hero text-center text-white py-5">
+    <div class="container">
+        <h1 class="display-4">About Us</h1>
+        <p class="lead">Empowering Lives, Sustaining Futures</p>
+    </div>
+</section>
+
+<!-- Welcome Section -->
+<section class="welcome-section py-5" style="background-color: #baf5ba; color: #2a2727;">
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="text-dark mb-4" style="font-family: 'Arial', sans-serif; font-weight: bold; text-shadow: 2px 2px 5px rgba(0,0,0,0.2);">Welcome to Lean On Me Health and Sustainable Solutions (LOMHS)</h2>
+                <p class="lead" style="font-size: 1.2rem; color: #333; line-height: 1.6;">A dedicated non-governmental organization committed to fostering healthier, prosperous, and environmentally conscious societies.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Mission and Vision -->
+<section class="mission-vision-values py-5">
+    <div class="container">
+        <div class="row justify-content-between">
+            <!-- Mission Section -->
+            <div class="col-md-5 mb-4">
+                <div class="card shadow-sm p-4 text-center oval-container" style="background-color: #F9F9F9; border-radius: 50px;">
+                    <h3 class="fw-bold" style="color: #2D6619;">Our Mission</h3>
+                    <p>To empower communities through equitable access to quality healthcare, gender equality, and reproductive health services, while fostering sustainable agricultural practices, environmental conservation, and the adoption of green energy solutions for a resilient and prosperous future.</p>
+                </div>
+            </div>
+
+            <!-- Vision Section -->
+            <div class="col-md-5 mb-4">
+                <div class="card shadow-sm p-4 text-center oval-container" style="background-color: #F9F9F9; border-radius: 50px;">
+                    <h3 class="fw-bold" style="color: #ED9315;">Our Vision</h3>
+                    <p>A world where communities thrive with equitable healthcare, gender equality, and sustainable practices for a prosperous and environmentally resilient future.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Oval Container Style */
+    .oval-container {
+        border-radius: 50px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        width: 100%; /* Full width for the containers */
+        height: 300px; /* Increased height for a more oval appearance */
+        margin: 0 auto; /* Center the elements */
+    }
+
+    /* Adjusting the gap between Mission and Vision */
+    .mb-4 {
+        margin-bottom: 2rem !important; /* Adjust gap between the sections */
+    }
+</style>
+
+
+<!-- Core Values -->
+<section class="core-values py-5 bg-light">
+    <div class="container">
+        <h3 class="text-center mb-4" style="color: #56D600;">Our Core Values</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-3 mb-4 text-center">
+                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="fw-bold">Equity and Inclusion</h5>
+                    <p>Commitment to ensuring access to resources and opportunities for all, regardless of gender, race, or socioeconomic background.</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 text-center">
+                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="fw-bold">Sustainability</h5>
+                    <p>Advocacy for practices and policies that protect the environment and promote the responsible use of natural resources.</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 text-center">
+                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="fw-bold">Empowerment</h5>
+                    <p>Supporting individuals and communities to become self-reliant and active participants in their development journey.</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 text-center">
+                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="fw-bold">Innovation</h5>
+                    <p>Leveraging cutting-edge solutions in healthcare, agriculture, and green energy to address community challenges.</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 text-center">
+                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="fw-bold">Collaboration</h5>
+                    <p>Building strong partnerships with stakeholders to achieve shared goals and maximize impact.</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 text-center">
+                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="fw-bold">Integrity and Transparency</h5>
+                    <p>Maintaining high standards of integrity, openness, and responsibility in all initiatives and operations.</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 text-center">
+                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="fw-bold">Resilience</h5>
+                    <p>Encouraging adaptive and forward-thinking approaches to overcome social, economic, and environmental challenges.</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4 text-center">
+                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="fw-bold">Compassion</h5>
+                    <p>We approach our work with understanding and respect for every individual and community we serve.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .value-circle {
+        background-color: #F9F9F9;
+        border-radius: 50%;
+        padding: 2rem;
+        width: 250px;
+        height: 250px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .value-circle h5 {
+        color: #56D600;
+        margin-bottom: 1rem;
+    }
+
+    .value-circle p {
+        font-size: 0.9rem;
+        color: #333;
+    }
+
+    .value-circle:hover {
+        background-color: #ED9315;
+        color: white;
+    }
+
+    .core-values .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+</style>
+
+
+
+    <!-- Services -->
+    <section class="services py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Our Services</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card shadow-sm p-3 bg-white rounded text-center">
+                        <h4 style="color: #2D6619;">Healthcare Access</h4>
+                        <p>Rehabilitation and reproductive health education to improve well-being.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card shadow-sm p-3 bg-white rounded text-center">
+                        <h4 style="color: #ED9315;">Gender Equality</h4>
+                        <p>Empowering women, girls, and people with disabilities through advocacy and education.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card shadow-sm p-3 bg-white rounded text-center">
+                        <h4 style="color: #56D600;">Sustainable Agriculture</h4>
+                        <p>Eco-friendly farming techniques and renewable energy adoption.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card shadow-sm p-3 bg-white rounded text-center">
+                        <h4 style="color: #2D6619;">Environmental Conservation</h4>
+                        <p>Reforestation and climate change awareness programs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Team -->
+    <section class="leadership py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">Meet Our Leadership Team</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card shadow-sm p-3">
+                        <h4>Board of Directors</h4>
+                        <ul>
+                            <li>Provides governance, oversight, and strategic guidance.</li>
+                            <li>Comprised of individuals with diverse expertise in healthcare, gender advocacy, environmental conservation, and sustainable development.</li>
+                            <li>Responsible for setting policies, ensuring financial accountability, and monitoring the organization’s progress toward its goals.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card shadow-sm p-3">
+                        <h4>CEO</h4>
+                        <ul>
+                            <li>Serves as the organization’s visionary leader and primary executive, responsible for implementing the Board's directives.</li>
+                            <li>Oversees the overall strategy, partnerships, and operations of the organization.</li>
+                            <li>Acts as the primary spokesperson, advocating for the organization's mission and engaging stakeholders.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card shadow-sm p-3">
+                        <h4>Program Directors</h4>
+                        <ul>
+                            <li>Lead the planning, implementation, and management of all organizational programs.</li>
+                            <li>Ensure alignment of program activities with the organization’s mission and monitor their impact on target communities.</li>
+                            <li>Collaborate with stakeholders to design impactful initiatives.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card shadow-sm p-3">
+                        <h4>Support Teams</h4>
+                        <ul>
+                            <li>Ensure operational excellence and community engagement.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <footer class="contact py-4 text-white text-center">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Location: Kisumu, Kenya</p>
+            <p>Email: <a href="mailto:info@lohms.org" class="text-light">info@lohms.org</a></p>
+            <p>Phone: +254 114300546</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

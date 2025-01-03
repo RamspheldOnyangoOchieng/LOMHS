@@ -6,90 +6,212 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lean On Me Health and Sustainable Solutions</title>
-    <!-- Load static files -->
+
+    <!-- Load Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <!-- Load Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+
 </head>
 <body>
-
     <!-- Main Navigation -->
-    <header class="main-header">
-        <div class="logo">
-            <h1><a href="{% url 'home' %}">Lean On Me</a></h1>
-        </div>
-        <nav class="desktop-nav">
-            <ul>
-                <li><a href="{% url 'home' %}#hero">Home</a></li>
-                <li><a href="{% url 'tafiti' %}">Learn More</a></li>
-                <li><a href="{% url 'donations' %}">Support Us</a></li>
-                <li><a href="{% url 'donations' %}">Donate</a></li>
-                <li><a href="{% url 'volunteer' %}">Volunteer</a></li>
+    <header class="main-header bg-warning shadow-sm sticky-top">
+        <div class="container d-flex justify-content-between align-items-center py-2">
+          <!-- Logo -->
+          <h1 class="logo mb-0">
+            <a href="{% url 'home' %}" class="text-decoration-none text-dark fw-bold">Lean On Me</a>
+          </h1>
+      
+          <!-- Desktop Navigation -->
+          <nav class="navbar  bottom border-body d-none d-md-block">
+            <ul class="nav">
+              <li class="nav-item">
+                <a href="{% url 'home' %}#hero" class="nav-link text-dark">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'about' %}" class="nav-link text-dark">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'services' %}" class="nav-link text-dark">Our Services</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'donations' %}" class="nav-link text-dark">Donate</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'volunteer' %}" class="nav-link text-dark">Volunteer</a>
+              </li>
             </ul>
+          </nav>
+      
+          <!-- Mobile Navigation Toggle Button -->
+<!-- Mobile Navigation Toggle Button -->
+        <button
+        id="mobile-nav-toggle"
+        class="d-md-none navbar-toggler btn btn-info p-2"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mobile-nav-menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav-menu"
+        >
+          <!-- Hamburger Icon -->
+        <span class="navbar-toggler-icon">
+            <i class="fas fa-bars text-white"></i> <!-- Font Awesome icon -->
+        </span>
+        <span class="navbar-toggler-icon" style="color: white;"></span>
+        </button>
+
+      
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-nav-menu" class="collapse d-md-none bg-light p-3 shadow-sm">
+          <ul class="list-unstyled">
+            <li>
+              <a href="{% url 'home' %}#hero" class="d-block text-dark py-2">Home</a>
+            </li>
+            <li>
+              <a href="{% url 'about' %}" class="d-block text-dark py-2">About Us</a>
+            </li>
+            <li>
+              <a href="{% url 'donations' %}" class="d-block text-dark py-2">Support Us</a>
+            </li>
+            <li>
+              <a href="{% url 'donations' %}" class="d-block text-dark py-2">Donate</a>
+            </li>
+            <li>
+              <a href="{% url 'volunteer' %}" class="d-block text-dark py-2">Volunteer</a>
+            </li>
+          </ul>
         </nav>
-        <!-- Mobile Navigation -->
-        <div class="mobile-nav">
-            <button id="mobile-nav-toggle">☰</button>
         </div>
-    </header>
+      </header>
+      
 
     <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="hero-content">
+    <section id="hero" class="hero text-center text-white" style="background-color: #2D6619; padding: 5rem 0;">
+        <div class="container">
             <h1>Transforming Lives, One Sustainable Solution at a Time.</h1>
-            <p>Empowering communities with equitable healthcare, environmental conservation, and sustainable development.</p>
-            <div class="cta-buttons">
-                <a href="{% url 'tafiti' %}" class="cta-btn">Learn More About Our Partner Us</a>
-                <a href="{% url 'donations' %}" class="cta-btn">Support Our Mission</a>
+            <p class="lead">Empowering communities with equitable healthcare, environmental conservation, and sustainable development.</p>
+            <div class="cta-buttons d-flex justify-content-center gap-2 flex-wrap">
+                <a href="{% url 'tafiti' %}" class="btn" style="background-color: #ED9315; color: white;">Learn More About Partnering</a>
+            <div class="container">
+              <a href="{% url 'donations' %}" class="btn btn-outline-light" style="border-color: #56D600; color: #56D600;">Support Our Mission</a>
+                <a href="{% url 'volunteer' %}" class="btn btn-outline-light" style="border-color: #56D600; color: #56D600;">Join Our Team</a>
+                <a href="{% url 'contact' %}" class="btn btn-outline-light" style="border-color: #56D600; color: #56D600;">Contact Us</a>
+            </div>
             </div>
         </div>
     </section>
 
-    <!-- Brief Introduction -->
-    <section class="intro">
-        <p>Lean On Me Health and Sustainable Solutions (LOMHS) is a dedicated non-governmental organization working to create healthier communities and sustainable environments. Through innovative healthcare services, environmental projects, and community empowerment, we are building a better tomorrow for all.</p>
+    <!-- Services Section -->
+    <section class="services py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Our Key Services</h2>
+            <div class="row g-4">
+                <!-- Healthcare Access -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card shadow-sm p-3 bg-white rounded text-center">
+                        <img src="{% static 'images/healthcare.jpg' %}" class="img-fluid rounded mb-3" alt="Healthcare Access">
+                        <h3>Healthcare Access</h3>
+                        <p>Providing essential healthcare services, rehabilitation, and reproductive health education to empower individuals and improve community well-being.</p>
+                    </div>
+                </div>
+                <!-- Gender Equality -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card shadow-sm p-3 bg-white rounded text-center">
+                        <img src="{% static 'images/gender_equality.jpg' %}" class="img-fluid rounded mb-3" alt="Gender Equality">
+                        <h3>Gender Equality</h3>
+                        <p>Promoting women, girls, and people with disabilities empowerment, gender rights, and equality through education, capacity-building, and advocacy initiatives.</p>
+                    </div>
+                </div>
+                <!-- Sustainable Agriculture -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card shadow-sm p-3 bg-white rounded text-center">
+                        <img src="{% static 'images/agriculture.jpg' %}" class="img-fluid rounded mb-3" alt="Sustainable Agriculture">
+                        <h3>Sustainable Agriculture</h3>
+                        <p>Supporting communities with eco-friendly farming techniques, renewable energy adoption, and training to boost productivity, health, and environmental conservation.</p>
+                    </div>
+                </div>
+                <!-- Environmental Conservation -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card shadow-sm p-3 bg-white rounded text-center">
+                        <img src="{% static 'images/conservation.jpg' %}" class="img-fluid rounded mb-3" alt="Environmental Conservation">
+                        <h3>Environmental Conservation</h3>
+                        <p>Implementing projects that protect natural ecosystems, promote reforestation, and create awareness about climate change and sustainability.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Key Services -->
-    <section class="services">
-        <h2>Our Key Services</h2>
-        <div class="service">
-            <h3>Healthcare Access and Reproductive Health</h3>
-            <p>Providing essential healthcare services, rehabilitation, and reproductive health education to empower individuals and improve community well-being.</p>
-        </div>
-        <div class="service">
-            <h3>Gender Equality and Advocacy</h3>
-            <p>Promoting women, girls, and people with disability empowerment, gender rights, and equality through education, capacity-building, and advocacy initiatives.</p>
-        </div>
-        <div class="service">
-            <h3>Sustainable Agriculture and Green Energy Solutions</h3>
-            <p>Supporting communities with eco-friendly farming techniques, renewable energy adoption, and training to boost productivity, health, and environmental conservation.</p>
-        </div>
-        <div class="service">
-            <h3>Environmental Conservation Programs</h3>
-            <p>Implementing projects that protect natural ecosystems, promote reforestation, and create awareness about climate change and sustainability.</p>
+     <!-- Awards and Recognition -->
+     <section class="awards py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Awards and Recognition</h2>
+            <p class="text-center">Our commitment to excellence and impactful initiatives has been recognized locally and globally.</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Winner of the Sustainability Impact Award - 2024</li>
+                <li class="list-group-item">Top 10 NGOs Driving Healthcare Innovation - 2023</li>
+                <li class="list-group-item">Green Future Leaders Certification - 2022</li>
+            </ul>
         </div>
     </section>
-
-    <!-- Partnerships and Impact -->
-    <section class="partnerships">
-        <h2>Partnerships and Collaborations</h2>
-        <p>LOMHS collaborates with local governments, international NGOs, and private institutions to amplify its impact and reach.</p>
-        <a href="{% url 'tafiti' %}" class="cta-btn">Visit Tafiti Innovation Hub</a>
-    </section>
-
+    
+        <!-- About the Team -->
+        <section class="team py-5 bg-light">
+            <div class="container text-center">
+                <h2>Meet Our Team</h2>
+                <p class="lead">Passionate professionals working together to create sustainable solutions.</p>
+                <div class="row">
+                    <!-- Team Member 1 -->
+                    <div class="col-md-4">
+                        <div class="team-member text-center">
+                            <img src="{% static 'images/team1.jpg' %}" alt="Team Member 1" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
+                            <h5>Jane Doe</h5>
+                            <p>Founder & CEO</p>
+                        </div>
+                    </div>
+                    <!-- Team Member 2 -->
+                    <div class="col-md-4">
+                        <div class="team-member text-center">
+                            <img src="{% static 'images/team2.jpg' %}" alt="Team Member 2" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
+                            <h5>John Smith</h5>
+                            <p>Chief Sustainability Officer</p>
+                        </div>
+                    </div>
+                    <!-- Team Member 3 -->
+                    <div class="col-md-4">
+                        <div class="team-member text-center">
+                            <img src="{% static 'images/team3.jpg' %}" alt="Team Member 3" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
+                            <h5>Alice Johnson</h5>
+                            <p>Head of Healthcare Innovation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     <!-- Contact Information -->
-    <footer class="contact">
-        <h2>Contact Us</h2>
-        <p>Address: Kisumu, Kenya</p>
-        <p>Email: <a href="mailto:info@lohms.org">info@lohms.org</a></p>
-        <p>Phone: +254 114300546</p>
-        <div class="social-media">
-            <a href="https://www.instagram.com" target="_blank">Instagram</a>
-            <a href="https://www.facebook.com" target="_blank">Facebook</a>
-            <a href="https://www.gofundme.com" target="_blank">GoFundMe</a>
+    <footer class="contact py-4 text-white text-center" style="background-color: #3b8e04;">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Address: Kisumu, Kenya</p>
+            <p>Email: <a href="mailto:info@lohms.org" class="text-light">info@lohms.org</a></p>
+            <p>Phone: +254 114300546</p>
+            <div class="social-media d-flex justify-content-center gap-3">
+                <a href="https://www.instagram.com" target="_blank" class="text-light">Instagram</a>
+                <a href="https://www.facebook.com" target="_blank" class="text-light">Facebook</a>
+                <a href="https://www.gofundme.com" target="_blank" class="text-light">GoFundMe</a>
+            </div>
         </div>
     </footer>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
     <script src="{% static 'js/home.js' %}"></script>
 </body>
 </html>
-

@@ -1,182 +1,115 @@
-/* General Styles */
+/* General styles */
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9;
+    background-color: #2D6619;
 }
 
-a {
-    text-decoration: none;
-    color: #2D6619; /* Primary Color */
+h1, h2 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-h1, h2, h3 {
-    margin: 0 0 15px;
+header {
+    background-color: #506619;
 }
 
-/* Header */
-.main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #2D6619; /* Primary Color */
+/* Hero section */
+#hero {
+    background-color: #2D6619;
+    padding: 60px 15px;
     color: white;
 }
 
-.logo h1 {
-    font-size: 24px;
-    color: white;
-}
-
-.desktop-nav ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.desktop-nav li {
-    margin-left: 15px;
-}
-
-.desktop-nav a {
+#hero h1 {
+    font-size: 2.5rem;
     font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    color: white;
 }
 
-.desktop-nav a:hover {
-    background-color: #56D600; /* Secondary Color */
-}
-
-/* Mobile Navigation */
-.mobile-nav {
-    display: none;
-}
-
-#mobile-nav-toggle {
-    font-size: 20px;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-}
-
-/* Hero Section */
-.hero {
-    background: #2D6619; /* Primary Color */
-    color: white;
-    padding: 50px 20px;
-    text-align: center;
-}
-
-.hero h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-.cta-buttons .cta-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: #56D600; /* Secondary Color */
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.cta-buttons .cta-btn:hover {
-    background-color: #ED9315; /* Secondary Color */
-}
-
-/* Intro Section */
-.intro {
-    padding: 20px;
-    background-color: #f9f9f9;
-    text-align: center;
-    font-size: 18px;
+#hero .cta-buttons .btn {
+    padding: 10px 25px;
 }
 
 /* Services Section */
 .services {
-    padding: 50px 20px;
-    text-align: center;
+    background-color: #F4F4F4;
+    padding: 50px 0;
+}
+
+.services .service-card {
     background-color: white;
-}
-
-.services h2 {
-    margin-bottom: 30px;
-    color: #2D6619; /* Primary Color */
-}
-
-.service {
-    margin-bottom: 30px;
-}
-
-.service h3 {
-    color: #56D600; /* Secondary Color */
-    margin-bottom: 10px;
-}
-
-/* Partnerships Section */
-.partnerships {
-    padding: 50px 20px;
-    text-align: center;
-    background-color: #f4f4f4;
-}
-
-.partnerships h2 {
-    margin-bottom: 20px;
-    color: #2D6619; /* Primary Color */
-}
-
-.partnerships .cta-btn {
-    background-color: #ED9315; /* Secondary Color */
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.partnerships .cta-btn:hover {
-    background-color: #56D600; /* Secondary Color */
-}
-
-/* Footer */
-.contact {
     padding: 20px;
-    background-color: #2D6619; /* Primary Color */
-    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.contact a {
-    color: #ED9315; /* Secondary Color */
+.services .service-card img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+/* Contact Section */
+footer {
+    background-color: #333;
+    padding: 30px 0;
+    color: rgb(233, 165, 20);
+}
+
+footer a {
+    color: #ED9315;
     text-decoration: none;
 }
 
-.contact a:hover {
-    color: #56D600; /* Secondary Color */
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .cta-buttons .btn {
+        padding: 8px 20px;
+    }
+
+    .service-card {
+        margin-bottom: 20px;
+    }
+
+    .nav-item a {
+        font-size: 0.9rem;
+    }
+
+    /* Mobile nav toggle button */
+    #mobile-nav-toggle {
+        display: block;
+    }
+
+    /* Show mobile navigation */
+    #mobile-nav-menu {
+        display: none;
+    }
 }
 
-.social-media a {
-    margin: 0 10px;
-    font-size: 16px;
-    color: white;
-}
+@media (max-width: 480px) {
+    .hero {
+        padding: 40px 15px;
+    }
 
-.social-media a:hover {
-    color: #ED9315; /* Secondary Color */
+    #hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .cta-buttons .btn {
+        padding: 8px 18px;
+    }
+
+    .service-card {
+        padding: 15px;
+    }
+
+    .contact {
+        padding: 20px 0;
+    }
 }
+/* Optional: Customize the toggle button and the navbar-toggler-icon */
+
+
