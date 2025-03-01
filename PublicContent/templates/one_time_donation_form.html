@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+  /* Remove extra spacing from body, header, and footer */
+  body, header, footer {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Optional: Remove container's top/bottom padding if needed */
+  .container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  /* Additional styling for the donation form */
+  .donation-form-title {
+    margin-bottom: 1rem;
+  }
+  
+  .donation-form-desc {
+    margin-bottom: 1.5rem;
+  }
+</style>
+
+<div class="container">
+  <!-- Centered Title -->
+  <h2 class="text-center donation-form-title">One-Time Donation</h2>
+  <p class="text-center donation-form-desc">Your generous contribution will help fund essential programs and initiatives.</p>
+  
+  <form method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <!-- Column 1: Personal Information -->
+      <div class="col-md-4">
+        <h5>Personal Information</h5>
+        <!-- Donation Amount -->
+        <div class="mb-3">
+          <label for="amount" class="form-label fw-bold">Donation Amount (USD)</label>
+          <input type="number" name="amount" id="amount" class="form-control" placeholder="Enter amount (e.g. 50)" min="1" required>
+        </div>
+        <!-- Donor Information -->
+        <div class="mb-3">
+          <label for="first_name" class="form-label">First Name</label>
+          <input type="text" name="first_name" id="first_name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="last_name" class="form-label">Last Name</label>
+          <input type="text" name="last_name" id="last_name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" name="email" id="email" class="form-control" placeholder="you@example.com" required>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone (Optional)</label>
+          <input type="tel" name="phone" id="phone" class="form-control" placeholder="+1 234 567 8901">
+        </div>
+      </div>
+      
+      <!-- Column 2: Billing Address -->
+      <div class="col-md-4">
+        <h5>Billing Address</h5>
+        <div class="mb-3">
+          <label for="address_line1" class="form-label">Address Line 1</label>
+          <input type="text" name="address_line1" id="address_line1" class="form-control" placeholder="Street address, P.O. box" required>
+        </div>
+        <div class="mb-3">
+          <label for="address_line2" class="form-label">Address Line 2 (Optional)</label>
+          <input type="text" name="address_line2" id="address_line2" class="form-control" placeholder="Apartment, suite, unit, etc.">
+        </div>
+        <div class="mb-3">
+          <label for="city" class="form-label">City</label>
+          <input type="text" name="city" id="city" class="form-control" required>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="state" class="form-label">State/Province</label>
+            <input type="text" name="state" id="state" class="form-control" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="zip_code" class="form-label">ZIP/Postal Code</label>
+            <input type="text" name="zip_code" id="zip_code" class="form-control" required>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="country" class="form-label">Country</label>
+          <input type="text" name="country" id="country" class="form-control" required>
+        </div>
+      </div>
+      
+    <!-- Column 3: Payment Information -->
+<div class="col-md-4">
+    <h5>Payment Information</h5>
+    <!-- Payment Options Dropdown -->
+    <div class="mb-3">
+      <label for="payment_method" class="form-label">Payment Method</label>
+      <select name="payment_method" id="payment_method" class="form-control" onchange="updatePaymentMethod()">
+        <option value="" selected disabled>Choose Your Preferred Payment Method</option>
+        <option value="card">Credit/Debit Card</option>
+        <option value="mpesa">Mpesa</option>
+        <option value="paypal">PayPal</option>
+      </select>
+    </div>
+    <!-- Card Details Section (shown if "card" is selected) -->
+    <div id="card_details" style="display: none;">
+      <div class="mb-3">
+        <label for="card_name" class="form-label">Name on Card</label>
+        <input type="text" name="card_name" id="card_name" class="form-control" placeholder="Full name as on card">
+      </div>
+      <div class="mb-3">
+        <label for="card_number" class="form-label">Card Number</label>
+        <input type="text" name="card_number" id="card_number" class="form-control" placeholder="1234 5678 9012 3456">
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="expiry_month" class="form-label">Expiry Month</label>
+          <input type="text" name="expiry_month" id="expiry_month" class="form-control" placeholder="MM">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="expiry_year" class="form-label">Expiry Year</label>
+          <input type="text" name="expiry_year" id="expiry_year" class="form-control" placeholder="YYYY">
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="cvv" class="form-label">CVV</label>
+          <input type="text" name="cvv" id="cvv" class="form-control" placeholder="3 or 4 digits">
+        </div>
+      </div>
+    </div>
+  
+    <!-- Mpesa Payment Section (if Mpesa is chosen) -->
+    <div id="mpesa_section" style="display: none;">
+      <p>Please ensure your phone number is correct. We will send you an Mpesa prompt.</p>
+      <button type="button" class="btn btn-success" onclick="simulateMpesaPayment()">Proceed with Mpesa</button>
+    </div>
+  
+    <!-- Other Payment Options Instructions (for PayPal) -->
+    <div id="other_payment_info" style="display: none;">
+      <p>Please click the button below to complete your payment via <span id="payment_option_name"></span>.</p>
+      <a id="payment_redirect" href="#" class="btn btn-success">Proceed to Payment</a>
+    </div>
+  
+    <!-- Additional Comments -->
+    <div class="mb-3">
+      <label for="comments" class="form-label">Additional Comments (Optional)</label>
+      <textarea name="comments" id="comments" rows="3" class="form-control" placeholder="Any special instructions or dedication?"></textarea>
+    </div>
+  </div>
+  <!-- End of Payment Information Column -->
+  
+  <!-- Centered Submit Button -->
+  <div class="text-center">
+    <button type="submit" class="btn btn-warning mt-3 d-block mx-auto">Donate Now</button>
+  </div>
+  
+  <script>
+    function updatePaymentMethod() {
+      const method = document.getElementById('payment_method').value;
+      console.log('Payment method selected:', method);
+      const cardDetails = document.getElementById('card_details');
+      const mpesaSection = document.getElementById('mpesa_section');
+      const otherPayment = document.getElementById('other_payment_info');
+      const paymentOptionName = document.getElementById('payment_option_name');
+      const paymentRedirect = document.getElementById('payment_redirect');
+  
+      if (method === 'card') {
+        cardDetails.style.display = 'block';
+        mpesaSection.style.display = 'none';
+        otherPayment.style.display = 'none';
+        // Set required attributes for card fields
+        document.getElementById('card_name').setAttribute('required', 'true');
+        document.getElementById('card_number').setAttribute('required', 'true');
+        document.getElementById('expiry_month').setAttribute('required', 'true');
+        document.getElementById('expiry_year').setAttribute('required', 'true');
+        document.getElementById('cvv').setAttribute('required', 'true');
+      } else {
+        cardDetails.style.display = 'none';
+        // Remove required attributes from card fields
+        document.getElementById('card_name').removeAttribute('required');
+        document.getElementById('card_number').removeAttribute('required');
+        document.getElementById('expiry_month').removeAttribute('required');
+        document.getElementById('expiry_year').removeAttribute('required');
+        document.getElementById('cvv').removeAttribute('required');
+  
+        if (method === 'mpesa') {
+          mpesaSection.style.display = 'block';
+          otherPayment.style.display = 'none';
+        } else if (method === 'paypal') {
+          otherPayment.style.display = 'block';
+          mpesaSection.style.display = 'none';
+          paymentOptionName.innerText = "PayPal";
+          // Replace the link below with your actual PayPal payment URL
+          paymentRedirect.href = "https://www.paypal.com/checkoutnow";
+        } else {
+          mpesaSection.style.display = 'none';
+          otherPayment.style.display = 'none';
+        }
+      }
+    }
+    
+    // Initialize the payment method on page load
+    document.addEventListener("DOMContentLoaded", updatePaymentMethod);
+    
+    function simulateMpesaPayment() {
+      alert("Mpesa payment simulation initiated. Please check your phone for the prompt.");
+      // In production, trigger your server-side Mpesa process via AJAX here.
+    }
+  </script>
+  
+{% endblock %}

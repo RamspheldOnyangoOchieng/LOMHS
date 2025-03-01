@@ -1,153 +1,24 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | Lean On Me Health and Sustainable Solutions</title>
+{% block title %}
+About Us | Lean On Me Health and Sustainable Solutions
+{% endblock %}
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/about.css' %}">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
 
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-        }
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  integrity="sha512-Fo3rlrZj/k7ujTn7rFGu2ruqF6jCUB83a7qzA0P+7bYYmfGvHPJv2p7GGFuow0xF2RBRwoH1mM6UJQHT2hnoAw=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer">
 
-        .main-header {
-            background-color: #2D6619;
-        }
+{% endblock %}
 
-        .main-header .nav-link:hover {
-            color: #ED9315;
-        }
-
-        .about-hero {
-            background: #2D6619;
-        }
-
-        .mission-vision-values .card {
-            border: none;
-            background-color: #F9F9F9;
-        }
-
-        .services .service-card {
-            border-top: 4px solid #2D6619;
-        }
-
-        .leadership .card {
-            border: none;
-            background-color: #F9F9F9;
-        }
-
-        footer {
-            background-color: #2D6619;
-        }
-
-        footer a:hover {
-            color: #ED9315;
-            text-decoration: underline;
-        }
-
-        .btn-primary {
-            background-color: #ED9315;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #56D600;
-        }
-
-        @media (max-width: 768px) {
-            .about-hero {
-                padding: 3rem 1rem;
-            }
-
-            .mission-vision-values .card,
-            .services .service-card,
-            .leadership .card {
-                margin-bottom: 1.5rem;
-            }
-        }
-    </style>
-</head>
-<body>
-     <!-- Main Navigation -->
-     <header class="main-header bg-warning shadow-sm sticky-top">
-        <div class="container d-flex justify-content-between align-items-center py-2">
-          <!-- Logo -->
-          <h1 class="logo mb-0">
-            <a href="{% url 'home' %}" class="text-decoration-none text-dark fw-bold">Lean On Me</a>
-          </h1>
-      
-          <!-- Desktop Navigation -->
-          <nav class="navbar  bottom border-body d-none d-md-block">
-            <ul class="nav">
-              <li class="nav-item">
-                <a href="{% url 'home' %}#hero" class="nav-link text-dark">Home</a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'about' %}" class="nav-link text-dark">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'services' %}" class="nav-link text-dark">Our Services</a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'donations' %}" class="nav-link text-dark">Donate</a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'volunteer' %}" class="nav-link text-dark">Volunteer</a>
-              </li>
-            </ul>
-          </nav>
-      
-          <!-- Mobile Navigation Toggle Button -->
-<!-- Mobile Navigation Toggle Button -->
-        <button
-        id="mobile-nav-toggle"
-        class="d-md-none navbar-toggler btn btn-info p-2"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#mobile-nav-menu"
-        aria-expanded="false"
-        aria-controls="mobile-nav-menu"
-        >
-          <!-- Hamburger Icon -->
-        <span class="navbar-toggler-icon">
-            <i class="fas fa-bars text-white"></i> <!-- Font Awesome icon -->
-        </span>
-        <span class="navbar-toggler-icon" style="color: white;"></span>
-        </button>
-
-      
-        <!-- Mobile Navigation Menu -->
-        <nav id="mobile-nav-menu" class="collapse d-md-none bg-light p-3 shadow-sm">
-          <ul class="list-unstyled">
-            <li>
-              <a href="{% url 'home' %}#hero" class="d-block text-dark py-2">Home</a>
-            </li>
-            <li>
-              <a href="{% url 'about' %}" class="d-block text-dark py-2">About Us</a>
-            </li>
-            <li>
-              <a href="{% url 'donations' %}" class="d-block text-dark py-2">Support Us</a>
-            </li>
-            <li>
-              <a href="{% url 'donations' %}" class="d-block text-dark py-2">Donate</a>
-            </li>
-            <li>
-              <a href="{% url 'volunteer' %}" class="d-block text-dark py-2">Volunteer</a>
-            </li>
-          </ul>
-        </nav>
-        </div>
-      </header>
-
+{% block content %}
 <!-- Hero Section -->
 <section class="about-hero text-center text-white py-5">
     <div class="container">
@@ -157,17 +28,19 @@
 </section>
 
 <!-- Welcome Section -->
-<section class="welcome-section py-5" style="background-color: #baf5ba; color: #2a2727;">
+<section class="welcome-section py-5">
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <h2 class="text-dark mb-4" style="font-family: 'Arial', sans-serif; font-weight: bold; text-shadow: 2px 2px 5px rgba(0,0,0,0.2);">Welcome to Lean On Me Health and Sustainable Solutions (LOMHS)</h2>
-                <p class="lead" style="font-size: 1.2rem; color: #333; line-height: 1.6;">A dedicated non-governmental organization committed to fostering healthier, prosperous, and environmentally conscious societies.</p>
+                <h2 class="welcome-heading">Welcome to Lean On Me Health and Sustainable Solutions (LOMHS)</h2>
+                <p class="lead welcome-text">
+                    A dedicated non-governmental organization committed to fostering healthier, 
+                    prosperous, and environmentally conscious societies.
+                </p>
             </div>
         </div>
     </div>
 </section>
-
 
 <!-- Mission and Vision -->
 <section class="mission-vision-values py-5">
@@ -175,223 +48,1681 @@
         <div class="row justify-content-between">
             <!-- Mission Section -->
             <div class="col-md-5 mb-4">
-                <div class="card shadow-sm p-4 text-center oval-container" style="background-color: #F9F9F9; border-radius: 50px;">
-                    <h3 class="fw-bold" style="color: #2D6619;">Our Mission</h3>
-                    <p>To empower communities through equitable access to quality healthcare, gender equality, and reproductive health services, while fostering sustainable agricultural practices, environmental conservation, and the adoption of green energy solutions for a resilient and prosperous future.</p>
+                <div class="card shadow-sm p-4 text-center oval-container mission-container">
+                    <h3 class="fw-bold mission-title">Our Mission</h3>
+                    <p class="mission-text">
+                        To empower communities through equitable access to quality healthcare, 
+                        gender equality, and reproductive health services, while fostering sustainable 
+                        agricultural practices, environmental conservation, and the adoption of green 
+                        energy solutions for a resilient and prosperous future.
+                    </p>
                 </div>
             </div>
-
             <!-- Vision Section -->
             <div class="col-md-5 mb-4">
-                <div class="card shadow-sm p-4 text-center oval-container" style="background-color: #F9F9F9; border-radius: 50px;">
-                    <h3 class="fw-bold" style="color: #ED9315;">Our Vision</h3>
-                    <p>A world where communities thrive with equitable healthcare, gender equality, and sustainable practices for a prosperous and environmentally resilient future.</p>
+                <div class="card shadow-sm p-4 text-center oval-container vision-container">
+                    <h3 class="fw-bold vision-title">Our Vision</h3>
+                    <p class="vision-text">
+                        A world where communities thrive with equitable healthcare, gender equality, 
+                        and sustainable practices for a prosperous and environmentally resilient future.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<style>
-    /* Oval Container Style */
-    .oval-container {
-        border-radius: 50px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        padding: 2rem;
-        width: 100%; /* Full width for the containers */
-        height: 300px; /* Increased height for a more oval appearance */
-        margin: 0 auto; /* Center the elements */
-    }
-
-    /* Adjusting the gap between Mission and Vision */
-    .mb-4 {
-        margin-bottom: 2rem !important; /* Adjust gap between the sections */
-    }
-</style>
-
-
-<!-- Core Values -->
+<!-- CORE VALUES
+     - On md+ screens, display as a grid.
+     - On smaller screens (< md), display as a carousel (one by one).
+-->
 <section class="core-values py-5 bg-light">
     <div class="container">
-        <h3 class="text-center mb-4" style="color: #56D600;">Our Core Values</h3>
-        <div class="row justify-content-center">
+        <h3 class="text-center mb-4 core-values-title">Our Core Values</h3>
+        
+        <!-- Grid Layout (visible on md+ screens) -->
+        <div class="row justify-content-center d-none d-md-flex">
+            <!-- 1. Equity and Inclusion -->
             <div class="col-md-3 mb-4 text-center">
-                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                <div class="value-circle mx-auto">
                     <h5 class="fw-bold">Equity and Inclusion</h5>
-                    <p>Commitment to ensuring access to resources and opportunities for all, regardless of gender, race, or socioeconomic background.</p>
+                    <p>
+                        Commitment to ensuring access to resources and opportunities for all, 
+                        regardless of gender, race, or socioeconomic background.
+                    </p>
                 </div>
             </div>
+            <!-- 2. Sustainability -->
             <div class="col-md-3 mb-4 text-center">
-                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                <div class="value-circle mx-auto">
                     <h5 class="fw-bold">Sustainability</h5>
-                    <p>Advocacy for practices and policies that protect the environment and promote the responsible use of natural resources.</p>
+                    <p>
+                        Advocacy for practices and policies that protect the environment and promote 
+                        the responsible use of natural resources.
+                    </p>
                 </div>
             </div>
+            <!-- 3. Empowerment -->
             <div class="col-md-3 mb-4 text-center">
-                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                <div class="value-circle mx-auto">
                     <h5 class="fw-bold">Empowerment</h5>
-                    <p>Supporting individuals and communities to become self-reliant and active participants in their development journey.</p>
+                    <p>
+                        Supporting individuals and communities to become self-reliant and active 
+                        participants in their development journey.
+                    </p>
                 </div>
             </div>
+            <!-- 4. Innovation -->
             <div class="col-md-3 mb-4 text-center">
-                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                <div class="value-circle mx-auto">
                     <h5 class="fw-bold">Innovation</h5>
-                    <p>Leveraging cutting-edge solutions in healthcare, agriculture, and green energy to address community challenges.</p>
+                    <p>
+                        Leveraging cutting-edge solutions in healthcare, agriculture, and green energy 
+                        to address community challenges.
+                    </p>
                 </div>
             </div>
+            <!-- 5. Collaboration -->
             <div class="col-md-3 mb-4 text-center">
-                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                <div class="value-circle mx-auto">
                     <h5 class="fw-bold">Collaboration</h5>
-                    <p>Building strong partnerships with stakeholders to achieve shared goals and maximize impact.</p>
+                    <p>
+                        Building strong partnerships with stakeholders to achieve shared goals and 
+                        maximize impact.
+                    </p>
                 </div>
             </div>
+            <!-- 6. Integrity and Transparency -->
             <div class="col-md-3 mb-4 text-center">
-                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                <div class="value-circle mx-auto">
                     <h5 class="fw-bold">Integrity and Transparency</h5>
-                    <p>Maintaining high standards of integrity, openness, and responsibility in all initiatives and operations.</p>
+                    <p>
+                        Maintaining high standards of integrity, openness, and responsibility in all 
+                        initiatives and operations.
+                    </p>
                 </div>
             </div>
+            <!-- 7. Resilience -->
             <div class="col-md-3 mb-4 text-center">
-                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                <div class="value-circle mx-auto">
                     <h5 class="fw-bold">Resilience</h5>
-                    <p>Encouraging adaptive and forward-thinking approaches to overcome social, economic, and environmental challenges.</p>
+                    <p>
+                        Encouraging adaptive and forward-thinking approaches to overcome social, 
+                        economic, and environmental challenges.
+                    </p>
                 </div>
             </div>
+            <!-- 8. Compassion -->
             <div class="col-md-3 mb-4 text-center">
-                <div class="value-circle d-flex flex-column align-items-center justify-content-center">
+                <div class="value-circle mx-auto">
                     <h5 class="fw-bold">Compassion</h5>
-                    <p>We approach our work with understanding and respect for every individual and community we serve.</p>
+                    <p>
+                        We approach our work with understanding and respect for every individual and 
+                        community we serve.
+                    </p>
                 </div>
             </div>
+        </div>
+        
+        <!-- Carousel (visible on screens < md) -->
+        <div id="coreValuesCarousel" class="carousel slide d-md-none" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <!-- 1. Equity and Inclusion -->
+                <div class="carousel-item active">
+                    <div class="value-circle mx-auto">
+                        <h5 class="fw-bold">Equity and Inclusion</h5>
+                        <p>
+                            Commitment to ensuring access to resources and opportunities for all, 
+                            regardless of gender, race, or socioeconomic background.
+                        </p>
+                    </div>
+                </div>
+                <!-- 2. Sustainability -->
+                <div class="carousel-item">
+                    <div class="value-circle mx-auto">
+                        <h5 class="fw-bold">Sustainability</h5>
+                        <p>
+                            Advocacy for practices and policies that protect the environment and 
+                            promote the responsible use of natural resources.
+                        </p>
+                    </div>
+                </div>
+                <!-- 3. Empowerment -->
+                <div class="carousel-item">
+                    <div class="value-circle mx-auto">
+                        <h5 class="fw-bold">Empowerment</h5>
+                        <p>
+                            Supporting individuals and communities to become self-reliant and active 
+                            participants in their development journey.
+                        </p>
+                    </div>
+                </div>
+                <!-- 4. Innovation -->
+                <div class="carousel-item">
+                    <div class="value-circle mx-auto">
+                        <h5 class="fw-bold">Innovation</h5>
+                        <p>
+                            Leveraging cutting-edge solutions in healthcare, agriculture, and green 
+                            energy to address community challenges.
+                        </p>
+                    </div>
+                </div>
+                <!-- 5. Collaboration -->
+                <div class="carousel-item">
+                    <div class="value-circle mx-auto">
+                        <h5 class="fw-bold">Collaboration</h5>
+                        <p>
+                            Building strong partnerships with stakeholders to achieve shared goals and 
+                            maximize impact.
+                        </p>
+                    </div>
+                </div>
+                <!-- 6. Integrity and Transparency -->
+                <div class="carousel-item">
+                    <div class="value-circle mx-auto">
+                        <h5 class="fw-bold">Integrity and Transparency</h5>
+                        <p>
+                            Maintaining high standards of integrity, openness, and responsibility in all 
+                            initiatives and operations.
+                        </p>
+                    </div>
+                </div>
+                <!-- 7. Resilience -->
+                <div class="carousel-item">
+                    <div class="value-circle mx-auto">
+                        <h5 class="fw-bold">Resilience</h5>
+                        <p>
+                            Encouraging adaptive and forward-thinking approaches to overcome social, 
+                            economic, and environmental challenges.
+                        </p>
+                    </div>
+                </div>
+                <!-- 8. Compassion -->
+                <div class="carousel-item">
+                    <div class="value-circle mx-auto">
+                        <h5 class="fw-bold">Compassion</h5>
+                        <p>
+                            We approach our work with understanding and respect for every individual and 
+                            community we serve.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Carousel Prev/Next controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#coreValuesCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#coreValuesCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
 </section>
 
+<!-- Services -->
+<section class="services py-5 ">
+    <div class="container">
+      <h2 class="text-center mb-4">Our Services</h2>
+      <div class="row g-4">
+        <!-- Card 1 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card text-center">
+            <!-- Icon container (overlaps the top border) -->
+            <div class="card-icon">
+              <i class="fas fa-stethoscope"></i> 
+              <!-- e.g., for healthcare -->
+            </div>
+  
+            <!-- Service image -->
+            <img
+              src="images/healthcare.jpg"
+              alt="Healthcare"
+              class="service-image"
+            />
+  
+            <!-- Card content -->
+            <div class="card-body">
+              <h4 class="service-healthcare">Healthcare Access</h4>
+              <p>
+                Rehabilitation and reproductive health education 
+                to improve well-being.
+              </p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Card 2 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card text-center">
+            <div class="card-icon">
+              <i class="fas fa-venus-mars"></i>
+              <!-- e.g., for gender equality -->
+            </div>
+            <img
+              src="images/gender.jpg"
+              alt="Gender Equality"
+              class="service-image"
+            />
+            <div class="card-body">
+              <h4 class="service-gender">Gender Equality</h4>
+              <p>
+                Empowering women, girls, and people with disabilities 
+                through advocacy and education.
+              </p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Card 3 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card text-center">
+            <div class="card-icon">
+              <i class="fas fa-seedling"></i>
+              <!-- e.g., for agriculture/green energy -->
+            </div>
+            <img
+              src="images/agriculture.jpg"
+              alt="Sustainable Agriculture"
+              class="service-image"
+            />
+            <div class="card-body">
+              <h4 class="service-agriculture">
+                Sustainable Agriculture &amp; Green Energy
+              </h4>
+              <p>
+                Eco-friendly farming techniques, renewable energy adoption, 
+                and training for environmental conservation.
+              </p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Card 4 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card text-center">
+            <div class="card-icon">
+              <i class="fas fa-globe"></i>
+              <!-- e.g., for environmental conservation -->
+            </div>
+            <img
+              src="images/conservation.jpg"
+              alt="Environmental Conservation"
+              class="service-image"
+            />
+            <div class="card-body">
+              <h4 class="service-conservation">Environmental Conservation</h4>
+              <p>
+                Reforestation and climate change awareness programs.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+
+  <section class="leadership py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Meet Our Leadership Team</h2>
+  
+      <!-- Introductory Text -->
+      <p class="lead text-center">
+        LOMHS is driven by a dedicated and dynamic leadership team committed to achieving our mission 
+        of empowering communities and promoting sustainable development. The structure of our leadership 
+        ensures strategic direction, operational efficiency, and accountability at all levels. We believe 
+        in a leadership that fosters collaboration, innovation, and accountability. Our team’s expertise 
+        and commitment are the driving forces behind our impact, as we work together to create sustainable 
+        and equitable solutions for the communities we serve.
+      </p>
+  
+      <!-- Leadership Cards: same shape, one row -->
+      <div class="row g-4 leadership-row">
+        
+        <!-- 1. Board of Directors -->
+        <div class="col-md-3">
+          <div class="card leadership-card">
+            <h4>Board of Directors</h4>
+            <ul>
+              <li>Provides governance, oversight, and strategic guidance.</li>
+              <li>Diverse expertise in healthcare, gender advocacy, environment, and sustainable development.</li>
+              <li>Sets policies, ensures financial accountability, and monitors progress.</li>
+            </ul>
+            <a href="#" class="arrow-link" onclick="toggleDetails(event, 'board-details')">
+              <span class="arrow">↓</span><br>
+              <span class="arrow-text">Meet the Board</span>
+            </a>
+          </div>
+        </div>
+  
+        <!-- 2. CEO -->
+        <div class="col-md-3">
+          <div class="card leadership-card">
+            <h4>CEO</h4>
+            <ul>
+              <li>Serves as the organization’s visionary leader and primary executive.</li>
+              <li>Oversees overall strategy, partnerships, and operations.</li>
+              <li>Advocates for the mission and engages stakeholders.</li>
+            </ul>
+            <a href="#" class="arrow-link" onclick="toggleDetails(event, 'ceo-details')">
+              <span class="arrow">↓</span><br>
+              <span class="arrow-text">Meet the CEO</span>
+            </a>
+          </div>
+        </div>
+  
+        <!-- 3. Directors (5 Members) -->
+        <div class="col-md-3">
+          <div class="card leadership-card">
+            <h4>Directors (5 Members)</h4>
+            <ul>
+              <li>Director of Operations</li>
+              <li>Director of Programs</li>
+              <li>Director of Finance &amp; Procurement</li>
+              <li>Director of Communication &amp; Fundraising</li>
+              <li>Director of Monitoring &amp; Evaluation</li>
+            </ul>
+            <a href="#" class="arrow-link" onclick="toggleDetails(event, 'directors-details')">
+              <span class="arrow">↓</span><br>
+              <span class="arrow-text">Meet the Directors</span>
+            </a>
+          </div>
+        </div>
+  
+        <!-- 4. Support Teams -->
+        <div class="col-md-3">
+          <div class="card leadership-card">
+            <h4>Support Teams</h4>
+            <ul>
+              <li>Ensure operational excellence and community engagement.</li>
+            </ul>
+            <a href="#" class="arrow-link" onclick="toggleDetails(event, 'support-teams')">
+              <span class="arrow">↓</span><br>
+              <span class="arrow-text">Meet the Support Teams</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Hidden Sections (initially display: none) -->
+   <!-- Board of Directors -->
+   <div id="board-details" class="hidden-section">
+    <h3 class="text-center">Board of Directors (9 Members)</h3>
+    <p>
+      The Board provides governance, oversight, and strategic guidance. Comprised of individuals 
+      with diverse expertise in healthcare, gender advocacy, environmental conservation, and 
+      sustainable development. Responsible for setting policies, ensuring financial accountability, 
+      and monitoring the organization’s progress toward its goals.
+    </p>
+    <div class="board-grid">
+      <!-- 9 Example Members with Social Media -->
+      <div class="board-member">
+        <img src="images/member1.jpg" alt="Board Member 1">
+        <h4>Board Member 1</h4>
+        <p>Email: board1@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="images/member2.jpg" alt="Board Member 2">
+        <h4>Board Member 2</h4>
+        <p>Email: board2@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="images/member3.jpg" alt="Board Member 3">
+        <h4>Board Member 3</h4>
+        <p>Email: board3@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="images/member4.jpg" alt="Board Member 4">
+        <h4>Board Member 4</h4>
+        <p>Email: board4@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="images/member5.jpg" alt="Board Member 5">
+        <h4>Board Member 5</h4>
+        <p>Email: board5@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="images/member6.jpg" alt="Board Member 6">
+        <h4>Board Member 6</h4>
+        <p>Email: board6@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="images/member7.jpg" alt="Board Member 7">
+        <h4>Board Member 7</h4>
+        <p>Email: board7@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="images/member8.jpg" alt="Board Member 8">
+        <h4>Board Member 8</h4>
+        <p>Email: board8@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="images/member9.jpg" alt="Board Member 9">
+        <h4>Board Member 9</h4>
+        <p>Email: board9@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CEO -->
+  <div id="ceo-details" class="hidden-section">
+    <h3 class="text-center">Chief Executive Officer</h3>
+    <p>
+      The CEO serves as the organization’s visionary leader and primary executive, 
+      responsible for implementing the Board's directives. Oversees the overall strategy, 
+      partnerships, and operations of the organization. Acts as the primary spokesperson, 
+      advocating for the organization's mission and engaging stakeholders.
+    </p>
+    <div class="board-grid">
+      <div class="board-member">
+        <img src="images/ceo6.jpg" alt="CEO Member 6">
+        <h4>CEO Member 6</h4>
+        <p>Email: ceo6@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Directors (5 Members) -->
+  <div id="directors-details" class="hidden-section">
+    <h3 class="text-center">Directors (5 Members)</h3>
+    
+    <!-- Directors in a responsive row of cards -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+      <!-- Director of Operations -->
+      <div class="col">
+        <div class="card p-3">
+          <img src="images/director1.jpg" alt="Director 1" class="card-img-top mb-2">
+          <h4 class="card-title">Director of Operations</h4>
+          <ul>
+            <li>Oversees administrative functions, human resources, and organizational policies.</li>
+            <li>Focuses on staff development, compliance, and fostering a productive workplace culture.</li>
+            <li>Leads the development and execution of operational strategies to support the mission.</li>
+          </ul>
+          <p>Email: director1@example.com</p>
+          <div class="social-links">
+            <a href="#" target="_blank">LinkedIn</a> |
+            <a href="#" target="_blank">Twitter</a> |
+            <a href="#" target="_blank">Facebook</a> |
+            <a href="#" target="_blank">Instagram</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Director of Programs -->
+      <div class="col">
+        <div class="card p-3">
+          <img src="images/director2.jpg" alt="Director 2" class="card-img-top mb-2">
+          <h4 class="card-title">Director of Programs</h4>
+          <ul>
+            <li>Leads the planning, implementation, and management of all organizational programs.</li>
+            <li>Ensures alignment with the mission and monitors impact on target communities.</li>
+            <li>Collaborates with stakeholders to design impactful initiatives.</li>
+          </ul>
+          <p>Email: director2@example.com</p>
+          <div class="social-links">
+            <a href="#" target="_blank">LinkedIn</a> |
+            <a href="#" target="_blank">Twitter</a> |
+            <a href="#" target="_blank">Facebook</a> |
+            <a href="#" target="_blank">Instagram</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Director of Finance and Procurement -->
+      <div class="col">
+        <div class="card p-3">
+          <img src="images/director3.jpg" alt="Director 3" class="card-img-top mb-2">
+          <h4 class="card-title">Director of Finance and Procurement</h4>
+          <ul>
+            <li>Ensures sound financial management, budgeting, and reporting for transparency.</li>
+            <li>Oversees procurement processes to guarantee cost-efficiency and compliance.</li>
+          </ul>
+          <p>Email: director3@example.com</p>
+          <div class="social-links">
+            <a href="#" target="_blank">LinkedIn</a> |
+            <a href="#" target="_blank">Twitter</a> |
+            <a href="#" target="_blank">Facebook</a> |
+            <a href="#" target="_blank">Instagram</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Director of Communication and Fundraising -->
+      <div class="col">
+        <div class="card p-3">
+          <img src="images/director4.jpg" alt="Director 4" class="card-img-top mb-2">
+          <h4 class="card-title">Director of Communication and Fundraising</h4>
+          <ul>
+            <li>Develops and executes communication strategies to enhance visibility and brand.</li>
+            <li>Leads fundraising efforts, donor engagement, and partnership building.</li>
+            <li>Secures resources to sustain and grow the organization’s initiatives.</li>
+          </ul>
+          <p>Email: director4@example.com</p>
+          <div class="social-links">
+            <a href="#" target="_blank">LinkedIn</a> |
+            <a href="#" target="_blank">Twitter</a> |
+            <a href="#" target="_blank">Facebook</a> |
+            <a href="#" target="_blank">Instagram</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Director of Monitoring and Evaluation -->
+      <div class="col">
+        <div class="card p-3">
+          <img src="images/director5.jpg" alt="Director 5" class="card-img-top mb-2">
+          <h4 class="card-title">Director of Monitoring and Evaluation</h4>
+          <ul>
+            <li>Designs systems to monitor program outcomes and evaluate effectiveness.</li>
+            <li>Provides data-driven insights for decision-making and continuous improvement.</li>
+            <li>Ensures accountability and measures progress across organizational efforts.</li>
+          </ul>
+          <p>Email: director5@example.com</p>
+          <div class="social-links">
+            <a href="#" target="_blank">LinkedIn</a> |
+            <a href="#" target="_blank">Twitter</a> |
+            <a href="#" target="_blank">Facebook</a> |
+            <a href="#" target="_blank">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Support Teams -->
+  <div id="support-teams" class="hidden-section">
+    <h3 class="text-center">Support Teams</h3>
+    <p>
+      Our support teams ensure operational excellence and community engagement, playing a vital 
+      role in facilitating our initiatives and strengthening our impact on the communities we serve.
+    </p>
+    <div class="board-grid">
+      <!-- 6 Example Support Team Members -->
+      <div class="board-member">
+        <img src="images/support1.jpg" alt="Support Team Member 1">
+        <h4>Support Member 1</h4>
+        <p>Email: support1@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="images/support2.jpg" alt="Support Team Member 2">
+        <h4>Support Member 2</h4>
+        <p>Email: support2@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="images/support3.jpg" alt="Support Team Member 3">
+        <h4>Support Member 3</h4>
+        <p>Email: support3@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="images/support4.jpg" alt="Support Team Member 4">
+        <h4>Support Member 4</h4>
+        <p>Email: support4@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="images/support5.jpg" alt="Support Team Member 5">
+        <h4>Support Member 5</h4>
+        <p>Email: support5@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+      <div class="board-member">
+        <img src="images/support6.jpg" alt="Support Team Member 6">
+        <h4>Support Member 6</h4>
+        <p>Email: support6@example.com</p>
+        <div class="social-links">
+          <a href="#" target="_blank">LinkedIn</a> |
+          <a href="#" target="_blank">Twitter</a> |
+          <a href="#" target="_blank">Facebook</a> |
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+      
+  <!-- Inline CSS -->
+  <style>
+  /* 
+    1) Force all cards to have the same shape.
+    2) Let them stretch to the same height.
+    3) Hidden sections appear on toggle.
+  */
+  
+  /* Row to stretch columns to same height */
+  .leadership-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+  
+  /* Each column is also a flex container for the card */
+  .leadership-row .col-md-3 {
+    display: flex;
+  }
+  
+  /* Card with consistent height & shape */
+  .leadership-card {
+    flex: 1;
+    border-radius: 15px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    padding: 1.5rem;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 300px; /* sets same shape for all cards */
+    position: relative;
+  }
+  
+  /* The arrow link */
+  .arrow-link {
+    margin-top: auto;
+    text-decoration: none;
+    color: #5eff00;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .arrow {
+    font-size: 2rem;
+    color: #5eff00;
+  }
+  .arrow-text {
+    font-size: 1rem;
+    text-align: center;
+    color: #1abf1ab3;
+  }
+  .arrow-link:hover .arrow,
+  .arrow-link:hover .arrow-text {
+    color: #fe9a0f;
+  }
+  
+  /* Hidden sections by default */
+  .hidden-section {
+    display: none;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #f4f3f1;
+    border-left: 5px solid #5eff00;
+    color: #3b3604;
+  }
+  .board-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    text-align: center;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  .board-member {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 180px;
+  }
+  .board-member img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  .board-member h4 {
+    margin: 10px 0 5px;
+    font-weight: bold;
+  }
+  .social-links a {
+    color: #1abf1a;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .social-links a:hover {
+    color: #fe9a0f;
+  }
+  
+  /* Wobble effect if desired */
+  @keyframes wobble {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .wobble {
+    animation: wobble 1.5s infinite;
+  }
+  
+  /* RESPONSIVE (optional) */
+  @media (max-width: 768px) {
+    .leadership-card { min-height: 280px; }
+  }
+  @media (max-width: 576px) {
+    .leadership-card { min-height: 250px; }
+  }
+  </style>
+  
+  <!-- Inline JS -->
+  <script>
+    let openSectionId = null;
+  
+    // Toggle the display of a hidden section
+    function toggleDetails(event, sectionId) {
+      event.preventDefault();
+      const newSection = document.getElementById(sectionId);
+  
+      // If user clicks the same link again, close it
+      if (openSectionId === sectionId) {
+        newSection.style.display = 'none';
+        openSectionId = null;
+        return;
+      }
+  
+      // Close previously open section if any
+      if (openSectionId) {
+        const oldSection = document.getElementById(openSectionId);
+        if (oldSection) {
+          oldSection.style.display = 'none';
+        }
+      }
+  
+      // Show the newly clicked section
+      newSection.style.display = 'block';
+      openSectionId = sectionId;
+    }
+  
+    // Close open section if user clicks outside
+    document.addEventListener('click', function(e) {
+      // If there's a section open
+      if (openSectionId) {
+        const openSection = document.getElementById(openSectionId);
+        // If the click is not inside the open section...
+        if (openSection && !openSection.contains(e.target)) {
+          // ...and not on the arrow link
+          if (!e.target.closest('.arrow-link')) {
+            // Close the open section
+            openSection.style.display = 'none';
+            openSectionId = null;
+          }
+        }
+      }
+    });
+  </script>
+  
+<!-- Inline Styles: Overwrite or continue from about.css -->
 <style>
+/* ---------------------------
+   Global Styles & Body
+---------------------------- */
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* ---------------------------
+   Hero Section
+---------------------------- */
+.about-hero {
+    background: linear-gradient(135deg, #baf5ba, #56d600);
+    color: rgba(191, 163, 38, 0.632);
+    padding: 80px 0;
+    text-align: center;
+}
+
+/* ---------------------------
+   Welcome Section
+---------------------------- */
+.welcome-section {
+    background-color: #baf5ba;
+    color: #2a2727;
+}
+.welcome-heading {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+.welcome-text {
+    font-size: 1.2rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 
+  Default (above 1200px)
+  - Large elliptical container
+  - Generous font sizes
+*/
+.oval-container {
+  border-radius: 50px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 300px;     /* fixed height to keep elliptical shape */
+  min-height: 250px; /* fallback for shorter content */
+  padding: 2rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.mission-title, .vision-title {
+  font-size: 2rem;   /* Large heading on desktops */
+}
+.mission-text, .vision-text {
+  font-size: 1rem;   /* Body text on desktops */
+  line-height: 1.5;
+}
+
+/* 
+  Up to 1200px 
+  - Slightly shrink container & text
+*/
+@media (max-width: 1200px) {
+  .oval-container {
+    height: 280px;
+    min-height: 220px;
+    padding: 1.8rem;
+  }
+  .mission-title, .vision-title {
+    font-size: 1.8rem;
+  }
+  .mission-text, .vision-text {
+    font-size: 0.95rem;
+  }
+}
+
+/* 
+  Up to 1024px 
+*/
+@media (max-width: 1024px) {
+  .oval-container {
+    height: 260px;
+    min-height: 210px;
+    padding: 1.6rem;
+  }
+  .mission-title, .vision-title {
+    font-size: 1.7rem;
+  }
+  .mission-text, .vision-text {
+    font-size: 0.9rem;
+  }
+}
+
+/* 
+  Up to 768px 
+*/
+@media (max-width: 768px) {
+  .oval-container {
+    height: 240px;
+    min-height: 190px;
+    padding: 1.4rem;
+  }
+  .mission-title, .vision-title {
+    font-size: 1.6rem;
+  }
+  .mission-text, .vision-text {
+    font-size: 0.85rem;
+  }
+}
+
+/* 
+  Up to 600px 
+*/
+@media (max-width: 600px) {
+  .oval-container {
+    height: 220px;
+    min-height: 180px;
+    padding: 1.2rem;
+  }
+  .mission-title, .vision-title {
+    font-size: 1.4rem;
+  }
+  .mission-text, .vision-text {
+    font-size: 0.8rem;
+  }
+}
+
+/* 
+  Up to 400px 
+*/
+@media (max-width: 400px) {
+  .oval-container {
+    height: 200px;
+    min-height: 160px;
+    padding: 1rem;
+  }
+  .mission-title, .vision-title {
+    font-size: 1.3rem;
+  }
+  .mission-text, .vision-text {
+    font-size: 0.75rem;
+  }
+}
+
+/* 
+  Up to 300px 
+*/
+@media (max-width: 300px) {
+  .oval-container {
+    height: 180px;
+    min-height: 140px;
+    padding: 0.8rem;
+  }
+  .mission-title, .vision-title {
+    font-size: 1.2rem;
+  }
+  .mission-text, .vision-text {
+    font-size: 0.7rem;
+  }
+}
+
+/* 
+  Up to 200px 
+*/
+@media (max-width: 200px) {
+  .oval-container {
+    height: 160px;
+    min-height: 130px;
+    padding: 0.6rem;
+  }
+  .mission-title, .vision-title {
+    font-size: 1.1rem;
+  }
+  .mission-text, .vision-text {
+    font-size: 0.65rem;
+  }
+}
+
+/* 
+  Up to 150px 
+  (extremely narrow, e.g., watch-sized screens)
+*/
+@media (max-width: 150px) {
+  .oval-container {
+    height: 140px;
+    min-height: 120px;
+    padding: 0.5rem;
+  }
+  .mission-title, .vision-title {
+    font-size: 1rem;
+  }
+  .mission-text, .vision-text {
+    font-size: 0.6rem;
+  }
+}
+/* Base .value-circle styles (example) */
+.value-circle {
+  background: linear-gradient(145deg, #f9f9f9, #ffffff);
+  border-radius: 50%;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  width: 230px;
+  height: 230px;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  /* Add a smooth transition for hover effects */
+  transition: transform 0.3s, background-color 0.3s, color 0.3s;
+}
+
+/* Hover effect with color & transform */
+.value-circle:hover {
+  background-color: #ffa20d;    /* background on hover */
+  color: rgb(245, 193, 23);     /* text color on hover */
+  transform: scale(1.05);       /* slight scale up on hover */
+}
+
+/* Change text color inside the circle on hover */
+.value-circle:hover h5,
+.value-circle:hover p {
+  color: rgb(46, 181, 22);
+}
+
+/* Title & Paragraph inside circle */
+.value-circle h5 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #56D600; /* or your brand color */
+  margin-bottom: 0.8rem;
+}
+.value-circle p {
+  font-size: 0.9rem;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
+}
+
+
+
+/* ---------------------------
+   RESPONSIVE BREAKPOINTS
+   from 1200px down to 150px
+---------------------------- */
+
+/* Up to 1200px */
+@media (max-width: 1200px) {
+  .value-circle {
+    width: 220px;
+    height: 220px;
+    padding: 1.8rem;
+  }
+  .value-circle h5 {
+    font-size: 1rem;
+  }
+  .value-circle p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Up to 1024px */
+@media (max-width: 1024px) {
+  .value-circle {
+    width: 210px;
+    height: 210px;
+    padding: 1.6rem;
+  }
+  .value-circle h5 {
+    font-size: 0.95rem;
+  }
+  .value-circle p {
+    font-size: 0.8rem;
+  }
+}
+
+
+/* Up to 768px */
+@media (max-width: 768px) {
+  .value-circle {
+    width: 190px;
+    height: 190px;
+    padding: 1.4rem;
+  }
+  .value-circle h5 {
+    font-size: 0.85rem;
+  }
+  .value-circle p {
+    font-size: 0.75rem;
+  }
+}
+
+/* Up to 600px */
+@media (max-width: 600px) {
+  .value-circle {
+    width: 180px;
+    height: 180px;
+    padding: 1.2rem;
+  }
+  .value-circle h5 {
+    font-size: 0.8rem;
+  }
+  .value-circle p {
+    font-size: 0.7rem;
+  }
+}
+
+/* Up to 540px (Surface Duo) */
+@media (max-width: 540px) {
+  .value-circle {
+    width: 170px;
+    height: 170px;
+    padding: 1.1rem;
+  }
+  .value-circle h5 {
+    font-size: 0.78rem;
+  }
+  .value-circle p {
+    font-size: 0.68rem;
+  }
+}
+
+/* Up to 400px */
+@media (max-width: 400px) {
+  .value-circle {
+    width: 160px;
+    height: 160px;
+    padding: 1rem;
+  }
+  .value-circle h5 {
+    font-size: 0.75rem;
+  }
+  .value-circle p {
+    font-size: 0.65rem;
+  }
+}
+
+/* Up to 300px */
+@media (max-width: 300px) {
+  .value-circle {
+    width: 140px;
+    height: 140px;
+    padding: 0.8rem;
+  }
+  .value-circle h5 {
+    font-size: 0.7rem;
+  }
+  .value-circle p {
+    font-size: 0.6rem;
+  }
+}
+
+/* Up to 200px */
+@media (max-width: 200px) {
+  .value-circle {
+    width: 120px;
+    height: 120px;
+    padding: 0.6rem;
+  }
+  .value-circle h5 {
+    font-size: 0.65rem;
+  }
+  .value-circle p {
+    font-size: 0.55rem;
+  }
+}
+
+/* Up to 150px */
+@media (max-width: 150px) {
+  .value-circle {
+    width: 110px;
+    height: 110px;
+    padding: 0.5rem;
+  }
+  .value-circle h5 {
+    font-size: 0.6rem;
+  }
+  .value-circle p {
+    font-size: 0.5rem;
+  }
+}
+@media (max-width: 820px) {
+  /* Example: Core Values Circles */
+  .value-circle {
+    width: 200px;
+    height: 200px;
+    padding: 1.5rem;  /* Adjust as needed */
+  }
+  .value-circle h5 {
+    font-size: 0.9rem;  /* Slightly smaller heading */
+  }
+  .value-circle p {
+    font-size: 0.78rem; /* Slightly smaller paragraph */
+  }
+
+  /* Example: Oval Container (Mission/Vision) */
+  .oval-container {
+    height: 200px;      /* or remove to let it auto-size */
+    min-height: 180px;
+    padding: 1.5rem;
+  }
+  .mission-title, .vision-title {
+    font-size: 1.3rem;
+  }
+  .mission-text, .vision-text {
+    font-size: 0.8rem;
+  }
+  
+  /* Add any other element adjustments you need at 820px here */
+}
+
+
+/* ---------------------------
+   Service Cards (Base Styles)
+---------------------------- */
+.service-card h4 {
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: bolder;
+    width: 100%;
+    font-size: 1.5rem; /* Default for larger screens */
+}
+
+/* Heading Colors */
+.service-healthcare { color: #2D6619; }
+.service-gender { color: #ED9315; }
+.service-agriculture { color: #56D600; }
+.service-conservation { color: #2D6619; }
+
+/* Parent Card Styling */
+.service-card {
+  position: relative;        
+  overflow: visible; 
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 40px;          /* space for the overlapping icon */
+}
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Icon Container Overlapping the Top Border */
+.card-icon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  background-color: #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Icon Inside the Container */
+.card-icon i {
+  font-size: 24px; 
+  color: #56D600; /* Adjust to match your brand color */
+}
+
+/* Hover Effect on the Icon Container */
+.service-card:hover .card-icon {
+  background-color: #56D600;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+.service-card:hover .card-icon i {
+  color: #fff;
+}
+
+/* Service Image Below the Icon */
+.service-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 20px; /* ensure no overlap with icon */
+}
+
+/* Card Body (Title + Paragraph) */
+.card-body {
+  padding: 1rem;
+}
+
+/* ---------------------------
+   RESPONSIVE BREAKPOINTS
+   (From 1200px down to 200px)
+---------------------------- */
+
+/* Up to 1200px */
+@media (max-width: 1200px) {
+  .service-card {
+    margin-top: 35px; 
+  }
+  .card-icon {
+    width: 55px;
+    height: 55px;
+  }
+  .card-icon i {
+    font-size: 22px;
+  }
+  .service-card h4 {
+    font-size: 1.4rem;
+  }
+}
+
+/* Up to 1024px */
+@media (max-width: 1024px) {
+  .service-card {
+    margin-top: 30px;
+  }
+  .card-icon {
+    width: 50px;
+    height: 50px;
+  }
+  .card-icon i {
+    font-size: 20px;
+  }
+  .service-card h4 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Up to 768px */
+@media (max-width: 768px) {
+  .service-card {
+    margin-top: 25px;
+  }
+  .card-icon {
+    width: 45px;
+    height: 45px;
+  }
+  .card-icon i {
+    font-size: 18px;
+  }
+  .service-card h4 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Up to 576px */
+@media (max-width: 576px) {
+  .service-card {
+    margin-top: 20px;
+  }
+  .card-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .card-icon i {
+    font-size: 16px;
+  }
+  .service-card h4 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Up to 400px */
+@media (max-width: 400px) {
+  .service-card {
+    margin-top: 15px;
+  }
+  .card-icon {
+    width: 35px;
+    height: 35px;
+  }
+  .card-icon i {
+    font-size: 14px;
+  }
+  .service-card h4 {
+    font-size: 1rem;
+  }
+}
+
+/* Up to 300px */
+@media (max-width: 300px) {
+  .service-card {
+    margin-top: 10px;
+  }
+  .card-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .card-icon i {
+    font-size: 12px;
+  }
+  .service-card h4 {
+    font-size: 0.95rem;
+  }
+}
+
+/* Up to 200px */
+@media (max-width: 200px) {
+  .service-card {
+    margin-top: 5px;
+  }
+  .card-icon {
+    width: 25px;
+    height: 25px;
+  }
+  .card-icon i {
+    font-size: 10px;
+  }
+  .service-card h4 {
+    font-size: 0.85rem;
+  }
+}
+
+/* ---------------------------
+   Hidden Sections & Board Grid
+---------------------------- */
+.hidden-section {
+    display: none;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    border-left: 5px solid #5eff00;
+}
+.board-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    text-align: center;
+    margin-top: 20px;
+    justify-content: center;
+}
+.board-member {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 180px;
+}
+.board-member img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.board-member h4 {
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+.social-links a {
+    color: #1abf1a;
+    text-decoration: none;
+    font-weight: bold;
+}
+.social-links a:hover {
+    color: #fe9a0f;
+}
+
+/* ---------------------------
+   Keyframe for wobble effect
+---------------------------- */
+@keyframes wobble {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* ---------------------------
+   Responsive Container Adjustments (250px -> 1200px)
+---------------------------- */
+
+/* Up to 1200px */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 1100px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+/* Up to 1024px */
+@media (max-width: 1024px) {
+    .about-hero {
+        padding: 60px 0;
+    }
+    .oval-container {
+        height: 280px;
+        min-height: 220px;
+        padding: 1.8rem;
+    }
     .value-circle {
-        background-color: #F9F9F9;
-        border-radius: 50%;
-        padding: 2rem;
-        width: 250px;
+        width: 210px;
+        height: 210px;
+        padding: 1.8rem;
+    }
+}
+/* Up to 768px */
+@media (max-width: 768px) {
+    .about-hero {
+        padding: 50px 10px;
+    }
+    .oval-container {
+        min-height: 220px;
+        padding: 1.5rem;
+    }
+    .value-circle {
+        width: 190px;
+        height: 190px;
+        padding: 1.4rem;
+    }
+    .card {
+        text-align: left;
+        padding: 1.2rem;
+    }
+}
+/* Up to 600px */
+@media (max-width: 600px) {
+    .about-hero h1 { font-size: 2rem; }
+    .about-hero p { font-size: 1rem; }
+    .welcome-heading { font-size: 1.5rem; }
+    .welcome-text { font-size: 1rem; }
+    .card { padding: 1rem; }
+    .value-circle {
+        width: 180px;
+        height: 180px;
+        padding: 1.2rem;
+    }
+    .oval-container {
         height: 250px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        min-height: 200px;
+        padding: 1rem;
     }
-
-    .value-circle h5 {
-        color: #56D600;
-        margin-bottom: 1rem;
+}
+/* Up to 400px */
+@media (max-width: 400px) {
+    .about-hero h1 { font-size: 1.8rem; }
+    .about-hero p { font-size: 0.9rem; }
+    .card { padding: 0.8rem; }
+    .value-circle {
+        width: 160px;
+        height: 160px;
+        padding: 1rem;
     }
-
-    .value-circle p {
-        font-size: 0.9rem;
-        color: #333;
+    .oval-container {
+        height: 220px;
+        min-height: 180px;
+        padding: 0.8rem;
     }
-
-    .value-circle:hover {
-        background-color: #ED9315;
-        color: white;
+}
+/* Up to 250px */
+@media (max-width: 250px) {
+    .about-hero h1 { font-size: 1.5rem; }
+    .about-hero p { font-size: 0.8rem; }
+    .card { padding: 0.5rem; }
+    .value-circle {
+        width: 140px;
+        height: 140px;
+        padding: 0.8rem;
     }
-
-    .core-values .row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+    .oval-container {
+        height: 200px;
+        min-height: 160px;
+        padding: 0.5rem;
     }
+}
 </style>
 
+<!-- JavaScript to Show Hidden Sections -->
+<script>
+    function showDetails(event, sectionId) {
+        event.preventDefault(); 
+        const section = document.getElementById(sectionId);
+        section.style.display = 'block'; 
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-
-    <!-- Services -->
-    <section class="services py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-4">Our Services</h2>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card shadow-sm p-3 bg-white rounded text-center">
-                        <h4 style="color: #2D6619;">Healthcare Access</h4>
-                        <p>Rehabilitation and reproductive health education to improve well-being.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card shadow-sm p-3 bg-white rounded text-center">
-                        <h4 style="color: #ED9315;">Gender Equality</h4>
-                        <p>Empowering women, girls, and people with disabilities through advocacy and education.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card shadow-sm p-3 bg-white rounded text-center">
-                        <h4 style="color: #56D600;">Sustainable Agriculture</h4>
-                        <p>Eco-friendly farming techniques and renewable energy adoption.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card shadow-sm p-3 bg-white rounded text-center">
-                        <h4 style="color: #2D6619;">Environmental Conservation</h4>
-                        <p>Reforestation and climate change awareness programs.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Leadership Team -->
-    <section class="leadership py-5">
-        <div class="container text-center">
-            <h2 class="mb-4">Meet Our Leadership Team</h2>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="card shadow-sm p-3">
-                        <h4>Board of Directors</h4>
-                        <ul>
-                            <li>Provides governance, oversight, and strategic guidance.</li>
-                            <li>Comprised of individuals with diverse expertise in healthcare, gender advocacy, environmental conservation, and sustainable development.</li>
-                            <li>Responsible for setting policies, ensuring financial accountability, and monitoring the organization’s progress toward its goals.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card shadow-sm p-3">
-                        <h4>CEO</h4>
-                        <ul>
-                            <li>Serves as the organization’s visionary leader and primary executive, responsible for implementing the Board's directives.</li>
-                            <li>Oversees the overall strategy, partnerships, and operations of the organization.</li>
-                            <li>Acts as the primary spokesperson, advocating for the organization's mission and engaging stakeholders.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card shadow-sm p-3">
-                        <h4>Program Directors</h4>
-                        <ul>
-                            <li>Lead the planning, implementation, and management of all organizational programs.</li>
-                            <li>Ensure alignment of program activities with the organization’s mission and monitor their impact on target communities.</li>
-                            <li>Collaborate with stakeholders to design impactful initiatives.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card shadow-sm p-3">
-                        <h4>Support Teams</h4>
-                        <ul>
-                            <li>Ensure operational excellence and community engagement.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Information -->
-    <footer class="contact py-4 text-white text-center">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <p>Location: Kisumu, Kenya</p>
-            <p>Email: <a href="mailto:info@lohms.org" class="text-light">info@lohms.org</a></p>
-            <p>Phone: +254 114300546</p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% endblock content %}

@@ -1,204 +1,170 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services | LOMHS</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .service-card {
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
+{% block title %}Our Services - LOMHS{% endblock %}
 
-        .service-card:hover {
-            transform: scale(1.05);
-        }
+<!-- Custom Styles for Visibility -->
+<style>
+    *,body {
+        background: hsl(102, 29%, 38%);
+        color: white;
+    }
 
-        .highlight-icon {
-            font-size: 1.5rem;
-            color: #56D600;
-        }
-    </style>
-</head>
+    h1, h2, h3, h4 {
+        font-weight: bold;
+        text-transform: uppercase;
+        color:white;
+    }
 
-<body>
-    <!-- Header -->
-      <!-- Main Navigation -->
-    <header class="main-header bg-warning shadow-sm sticky-top">
-        <div class="container d-flex justify-content-between align-items-center py-2">
-          <!-- Logo -->
-          <h1 class="logo mb-0">
-            <a href="{% url 'home' %}" class="text-decoration-none text-dark fw-bold">Lean On Me</a>
-          </h1>
+    .p {
+        font-size: 1.2rem;
+        color:white;
+    }
 
-          <!-- Desktop Navigation -->
-          <nav class="navbar  bottom border-body d-none d-md-block">
-            <ul class="nav">
-              <li class="nav-item">
-                <a href="{% url 'home' %}#hero" class="nav-link text-dark">Home</a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'about' %}" class="nav-link text-dark">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'services' %}" class="nav-link text-dark">Our Services</a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'donations' %}" class="nav-link text-dark">Donate</a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'volunteer' %}" class="nav-link text-dark">Volunteer</a>
-              </li>
-            </ul>
-          </nav>
+    .hero-section {
+        text-align: center;
+        padding: 60px 20px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+    }
 
-          <!-- Mobile Navigation Toggle Button -->
-<!-- Mobile Navigation Toggle Button -->
-        <button
-        id="mobile-nav-toggle"
-        class="d-md-none navbar-toggler btn btn-info p-2"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#mobile-nav-menu"
-        aria-expanded="false"
-        aria-controls="mobile-nav-menu"
-        >
-          <!-- Hamburger Icon -->
-        <span class="navbar-toggler-icon">
-            <i class="fas fa-bars text-white"></i> <!-- Font Awesome icon -->
-        </span>
-        <span class="navbar-toggler-icon" style="color: white;"></span>
-        </button>
+    .btn-lg {
+        font-size: 1.2rem;
+        padding: 15px 30px;
+    }
 
-        <!-- Mobile Navigation Menu -->
-        <nav id="mobile-nav-menu" class="collapse d-md-none bg-light p-3 shadow-sm">
-          <ul class="list-unstyled">
-            <li>
-              <a href="{% url 'home' %}#hero" class="d-block text-dark py-2">Home</a>
-            </li>
-            <li>
-              <a href="{% url 'about' %}" class="d-block text-dark py-2">About Us</a>
-            </li>
-            <li>
-              <a href="{% url 'services' %}" class="d-block text-dark py-2">Our Services</a>
-            </li>
-            <li>
-              <a href="{% url 'donations' %}" class="d-block text-dark py-2">Donate</a>
-            </li>
-            <li>
-              <a href="{% url 'volunteer' %}" class="d-block text-dark py-2">Volunteer</a>
-            </li>
-          </ul>
-        </nav>
-        </div>
+    .btn-warning, .btn-primary, .btn-success {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-      </header>
-      <!-- End of Main Navigation -->
-       <!--Hero section-->
-       <section id="hero" class="d-flex align-items-center">
-        <div class="container text-center bg-success text-bg-warning py-5">
-            <h1 class="display-4">What We Do</h1>
-            <p class="lead">Discover how LOMHS is "Transforming Communities with Health, Equality, Sustainability, and Opportunity."</p>
-        </div>
+    .btn-warning:hover, .btn-primary:hover, .btn-success:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.4);
+    }
 
-      </section>
-    <!-- Introduction -->
+    .service-card {
+        background: white;
+        color: black;
+        text-align: center;
+        padding: 30px;
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+    }
+
+    .impact-box {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 10px;
+        color: white;
+    }
+</style>
+
+{% block content %}
+<div class="container py-5">
+    
+    <!-- Hero Section -->
+    <section class="hero-section text-white">
+        <h1 class="display-3">What We Do</h1>
+        <p class="lead">Transforming Communities with Health, Equality, Sustainability, and Opportunity.</p>
+    </section>
+
+    <!-- Services Section -->
     <section class="py-5">
         <div class="container">
-            <p class="text-center">LOMHS provides comprehensive services to empower communities and promote sustainable development. From ensuring access to quality healthcare and reproductive health education to advancing gender equality, eco-friendly agriculture, renewable energy solutions, and environmental conservation, we strive to create a healthier, more equitable, and resilient future for all.</p>
+            <div class="row align-items-center">
+                <!-- Left Side -->
+                <div class="col-lg-5">
+                    <h3 class="fs-6 text-warning">Our Approach</h3>
+                    <h2 class="display-5">Empowering Communities with Equitable Solutions</h2>
+                    <p>We drive change through accessible healthcare, environmental conservation, and sustainable development.</p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">Get Involved</a>
+                </div>
+
+                <!-- Services -->
+                <div class="col-lg-7">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="service-card">
+                                <i class="bi bi-heart-pulse text-danger display-4"></i>
+                                <h4>Healthcare & Reproductive Health</h4>
+                                <p>Mobile clinics, maternal care, HIV/AIDS awareness, and family planning services.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="service-card">
+                                <i class="bi bi-gender-ambiguous text-primary display-4"></i>
+                                <h4>Gender Equality & Advocacy</h4>
+                                <p>Scholarships, skill-building, safe spaces, and policy advocacy.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="service-card">
+                                <i class="bi bi-tree text-success display-4"></i>
+                                <h4>Sustainable Agriculture & Green Energy</h4>
+                                <p>Climate-smart farming, renewable energy training, and market access support.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="service-card">
+                                <i class="bi bi-globe text-warning display-4"></i>
+                                <h4>Environmental Conservation</h4>
+                                <p>Tree planting, waste management education, and ecosystem restoration.</p>
+                            </div>
+                        </div>
+                    </div> 
+                </div> 
+            </div>
         </div>
     </section>
 
-    <!-- Our Services -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row">
-                <!-- Service 1 -->
-                <div class="col-md-6 mb-4">
-                    <div class="card service-card p-4 h-100">
-                        <h3 class="text-primary">Healthcare Access and Reproductive Health</h3>
-                        <p><strong>What We Do:</strong> Provide essential healthcare services, rehabilitation resources, and reproductive health education to underserved communities.</p>
-                        <p><strong>How We Do It:</strong></p>
-                        <ul>
-                            <li>Mobile clinics and healthcare outreach programs.</li>
-                            <li>Workshops on HIV/AIDS, drug abuse, and family planning.</li>
-                        </ul>
-                        <p><strong>Impact:</strong> Reduced maternal mortality and empowered individuals.</p>
-                    </div>
+    <!-- Impact Section -->
+    <section class="text-center my-5">
+        <h3>Our Impact</h3>
+        <div class="row g-4 mt-4">
+            <div class="col-md-4">
+                <div class="impact-box">
+                    <h4><i class="bi bi-lightbulb"></i> Energy Hub</h4>
+                    <p>500+ households now have reliable electricity.</p>
                 </div>
-
-                <!-- Service 2 -->
-                <div class="col-md-6 mb-4">
-                    <div class="card service-card p-4 h-100">
-                        <h3 class="text-secondary">Gender Equality and Advocacy</h3>
-                        <p><strong>What We Do:</strong> Empower women, girls, and the disabled through education and awareness programs.</p>
-                        <p><strong>How We Do It:</strong></p>
-                        <ul>
-                            <li>Scholarships and vocational training.</li>
-                            <li>Dialogue on gender-based violence.</li>
-                        </ul>
-                        <p><strong>Impact:</strong> Inclusive communities with equal opportunities.</p>
-                    </div>
+            </div>
+            <div class="col-md-4">
+                <div class="impact-box">
+                    <h4><i class="bi bi-heart"></i> Reproductive Health</h4>
+                    <p>Health campaigns support youth at Maraba Children's Home.</p>
                 </div>
-
-                <!-- Service 3 -->
-                <div class="col-md-6 mb-4">
-                    <div class="card service-card p-4 h-100">
-                        <h3 class="text-success">Sustainable Agriculture and Green Energy</h3>
-                        <p><strong>What We Do:</strong> Promote eco-friendly farming practices and renewable energy solutions.</p>
-                        <p><strong>How We Do It:</strong></p>
-                        <ul>
-                            <li>Climate-smart agricultural training.</li>
-                            <li>Distributing solar and biogas systems.</li>
-                        </ul>
-                        <p><strong>Impact:</strong> Enhanced food security and reduced environmental degradation.</p>
-                    </div>
-                </div>
-
-                <!-- Service 4 -->
-                <div class="col-md-6 mb-4">
-                    <div class="card service-card p-4 h-100">
-                        <h3 class="text-warning">Environmental Conservation Programs</h3>
-                        <p><strong>What We Do:</strong> Protect ecosystems and combat deforestation.</p>
-                        <p><strong>How We Do It:</strong></p>
-                        <ul>
-                            <li>Tree-planting and reforestation campaigns.</li>
-                            <li>Community education on waste management.</li>
-                        </ul>
-                        <p><strong>Impact:</strong> Sustained biodiversity and climate resilience.</p>
-                    </div>
+            </div>
+            <div class="col-md-4">
+                <div class="impact-box">
+                    <h4><i class="bi bi-tree"></i> Environmental Restoration</h4>
+                    <p>Thousands of trees planted in Kakamega.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Success Stories -->
-    <section class="py-5 bg-light">
-        <div class="container text-center">
-            <h3 class="mb-4">Success Stories</h3>
-            <ul class="list-unstyled">
-                <li><span class="highlight-icon">🌟</span> Over 500 households now have access to reliable electricity.</li>
-                <li><span class="highlight-icon">🌟</span> Youth at Maraba Children's Home benefit from our campaigns.</li>
-                <li><span class="highlight-icon">🌟</span> Tree-planting initiatives restored hectares of degraded land.</li>
-            </ul>
-        </div>
-    </section>
-
     <!-- Call to Action -->
-    <section class="py-5 text-center">
-        <div class="container">
-            <p class="lead">Contact us at <a href="mailto:info@lomhs.org">info@lomhs.org</a> or call +254 114300546 to learn more about our programs.</p>
-            <button class="btn btn-primary mx-2">Get Involved</button>
-            <button class="btn btn-success mx-2">Support Our Work</button>
+    <section class="text-center my-5">
+        <h3>How to Access Our Services</h3>
+        <p class="fs-5">
+            Contact us at <strong>info@lomhs.org</strong> or call <strong>+254 114 300 546</strong> for assistance.
+        </p>
+        <a href="{% url 'service_request' %}" class="btn btn-warning btn-lg">Request a Service</a>
+    </section>
+
+    <!-- Get Involved -->
+    <section class="text-center my-5">
+        <h3>Get Involved</h3>
+        <p class="fs-5">Join us in making a difference. Volunteer or support our programs today.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{% url 'volunteer' %}" class="btn btn-primary btn-lg">Join as a Volunteer</a>
+            <a href="{% url 'donations' %}" class="btn btn-success btn-lg">Support Our Work</a>
         </div>
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</!--He>
-
-</html>
+</div>
+{% endblock %}

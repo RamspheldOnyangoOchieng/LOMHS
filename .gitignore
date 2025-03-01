@@ -1,0 +1,16 @@
+~$MHS_SRSupdate[1].docx
+
+# Ignore all .env files
+.env
+
+# Ignore the entire node_modules directory
+node_modules/
+
+# Ignore compiled Python files
+*.pyc
+
+# Ignore all log files
+*.log
+
+# Ignore coverage folder (common in test setups)
+coverage/

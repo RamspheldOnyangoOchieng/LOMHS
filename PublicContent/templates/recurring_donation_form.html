@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <h2>Recurring Donation</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="monthly_amount" class="form-label">Monthly Donation Amount</label>
+      <input type="number" name="monthly_amount" id="monthly_amount" class="form-control" required>
+    </div>
+    <!-- Additional fields for setting up recurring payments -->
+
+    <button type="submit" class="btn btn-primary">Set Up Monthly Donation</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}EnviroServe Volunteer Program{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+    .hero {
+        background: url("{% static 'images/form.jpg' %}") no-repeat center center;
+        background-size: cover;
+        height: 100vh;
+        color: rgb(160, 109, 15);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        max-width: 600px;
+    }
+    @keyframes dance {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px) rotate(-5deg); }
+        50% { transform: translateX(5px) rotate(5deg); }
+        75% { transform: translateX(-3px) rotate(-3deg); }
+    }
+    .hero button {
+        font-size: 1.2rem;
+        padding: 0.8rem 2rem;
+        background-color: #55ff00;
+        color: rgb(31, 22, 6);
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        animation: dance 0.5s infinite ease-in-out;
+    }
+    .hero button:hover {
+        background-color: #e9f1e7;
+    }
+    .volunteer-form {
+        display: none;
+        margin-top: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 400px;
+    }
+    .volunteer-form input, .volunteer-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .volunteer-form button {
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .volunteer-form button:hover {
+        background-color: #218838;
+    }
+</style>
+
+<!-- Hero Section -->
+<div class="hero">
+    <h1>Join Us Today!</h1>
+    <p>Make a real difference by volunteering with EnviroServe. Help us revolutionize e-waste management and protect our planet.</p>
+    <button id="joinButton">Join Us Today!</button>
+
+    <!-- Volunteer Form -->
+    <div class="volunteer-form" id="volunteerForm">
+        <h3>Volunteer Registration</h3>
+        <form method="POST" action="{% url 'volunteer_submit' %}">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <textarea name="message" placeholder="Why do you want to volunteer?" rows="4" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('joinButton').addEventListener('click', function() {
+        var form = document.getElementById('volunteerForm');
+        if (form.style.display === "none" || form.style.display === "") {
+            form.style.display = "block"; 
+        } else {
+            form.style.display = "none"; 
+        }
+    });
+</script>
+
+{% endblock %}

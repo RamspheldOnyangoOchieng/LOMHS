@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}News & Events | LOMHS{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center section-heading">News & Events</h1>
+    <p class="text-center lead">Stay updated on LOMHS programs, events, and impact stories.</p>
+
+    <!-- Activity Carousel -->
+    <div id="activityCarousel" class="carousel slide mb-5 shadow rounded" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'images/comm1.jpg' %}" class="d-block w-100 carousel-img" alt="Community Outreach">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/green1.jpeg' %}" class="d-block w-100 carousel-img" alt="Environmental Cleanup">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/green2.jpeg' %}" class="d-block w-100 carousel-img" alt="Health Initiative">
+            </div>
+        </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="row mb-4 justify-content-center">
+        <div class="col-md-6">
+            <div class="input-group shadow-sm">
+                <input type="text" id="searchNews" class="form-control" placeholder="Search news & events...">
+                <button class="btn btn-success" type="button" onclick="filterNews()">Search</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mb-4">
+        <button class="btn btn-outline-success filter-btn" data-category="all">All</button>
+        <button class="btn btn-outline-success filter-btn" data-category="community">Community Outreach</button>
+        <button class="btn btn-outline-success filter-btn" data-category="environment">Environmental Conservation</button>
+        <button class="btn btn-outline-success filter-btn" data-category="health">Health Initiatives</button>
+    </div>
+
+    <!-- News Section -->
+    <div class="row" id="newsContainer">
+        <div class="col-md-6 mb-4 news-item" data-category="community">
+            <div class="card shadow-sm border-0 rounded">
+                <img src="{% static 'images/comm1.jpg' %}" class="card-img-top" alt="Maraba Children's Home Visit">
+                <div class="card-body">
+                    <h5 class="card-title">LOMHS Visits Maraba Children's Home</h5>
+                    <p class="card-text">On 23rd November 2024, LOMHS visited Maraba Children's Home in Kakamega to support vulnerable children...</p>
+                    <button class="btn btn-outline-success read-more-btn" data-bs-toggle="modal" data-bs-target="#news1Modal">Read More</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4 news-item" data-category="health">
+            <div class="card shadow-sm border-0 rounded">
+                <img src="{% static 'images/comm1.jpg' %}" class="card-img-top" alt="Safe Homes Program">
+                <div class="card-body">
+                    <h5 class="card-title">LOMHS Participates in Safe Homes Launch</h5>
+                    <p class="card-text">A new initiative in Kakamega provides safe spaces for women and girls affected by gender-based violence...</p>
+                    <button class="btn btn-outline-success read-more-btn" data-bs-toggle="modal" data-bs-target="#news2Modal">Read More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals for News Details -->
+<div class="modal fade" id="news1Modal" tabindex="-1" aria-labelledby="news1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="news1ModalLabel">LOMHS Visits Maraba Children's Home</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="{% static 'images/maraba-visit.jpg' %}" class="img-fluid" alt="Maraba Visit">
+                <p>On 23rd November 2024, LOMHS visited Maraba Children's Home to support vulnerable children with essential supplies...</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .section-heading {
+        color: #2D6619;
+        font-weight: bold;
+    }
+
+    .filter-btn {
+        margin: 5px;
+    }
+
+    .carousel-img {
+        height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .card-img-top {
+        height: 250px;
+        object-fit: cover;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function filterNews() {
+        let searchQuery = document.getElementById('searchNews').value.toLowerCase();
+        document.querySelectorAll('.news-item').forEach(item => {
+            let title = item.querySelector('.card-title').innerText.toLowerCase();
+            let text = item.querySelector('.card-text').innerText.toLowerCase();
+            item.style.display = (title.includes(searchQuery) || text.includes(searchQuery)) ? "block" : "none";
+        });
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            let category = this.getAttribute('data-category');
+            document.querySelectorAll('.news-item').forEach(item => {
+                item.style.display = (category === 'all' || item.getAttribute('data-category') === category) ? "block" : "none";
+            });
+        });
+    });
+</script>
+{% endblock %}

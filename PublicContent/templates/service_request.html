@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Request a Service</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="service_type" class="form-label">Select Service</label>
+            <select class="form-control" id="service_type" name="service_type">
+                <option value="Healthcare">Healthcare Access</option>
+                <option value="Education">Education & Training</option>
+                <option value="Environmental">Environmental Conservation</option>
+                <option value="Community Support">Community Support</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Additional Information</label>
+            <textarea class="form-control" id="message" name="message" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Request</button>
+    </form>
+</div>
+{% endblock %}
