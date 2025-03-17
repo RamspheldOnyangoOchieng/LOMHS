@@ -1,0 +1,1 @@
+web: gunicorn LOMHS_Website.wsgi --log-file -
