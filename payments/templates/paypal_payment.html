@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}PayPal Payment{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <h2>Complete Your Payment</h2>
+      <p>You are donating <strong>${{ amount }}</strong> for {{ description }}.</p>
+      {% if recurring %}
+        <p>This is a recurring donation.</p>
+      {% else %}
+        <p>This is a one-time donation.</p>
+      {% endif %}
+      <p>Your donation reference is: <strong>{{ donation_id }}</strong></p>
+      <p>Your PayPal order ID is: <strong>{{ order_id }}</strong></p>
+      <a href="https://www.paypal.com/checkoutnow?token={{ order_id }}" class="btn btn-warning btn-lg mt-3">
+         Proceed to PayPal
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

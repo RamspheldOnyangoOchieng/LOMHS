@@ -1,9 +1,18 @@
-from django.shortcuts import render
 from django.templatetags.static import static
-from .models import Service, Impact  # Import your models
+from .models import Service, Impact, Donation, PayPalTransaction, RecurringDonation
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import RecurringDonationForm
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.urls import reverse
+import json
+import uuid
+from django.conf import settings
+import requests
 
-# Create your views here.
-
+# Basic Page Views
 def home(request):
     return render(request, 'home.html')
 
@@ -28,15 +37,12 @@ def volunteer_submit(request):
 def news(request):
     return render(request, 'news.html')
 
-
-
 def services(request):
     # List of static images
     image_list = [
         "farm.jpeg", "farm1.jpeg", "green1.jpeg", "green2.jpeg",
         "image.png", "h1.jpeg", "images.jpeg"
     ]
-    
     images = [static(f"images/{img}") for img in image_list]  # Prepend static path
 
     # Define services dynamically
@@ -59,7 +65,6 @@ def services(request):
         "services": services,
         "impacts": impacts
     }
-
     return render(request, "services.html", context)
 
 def service_request(request):
@@ -67,28 +72,29 @@ def service_request(request):
 
 def one_time_donation_form(request):
     if request.method == 'POST':
-        # Process form data & handle payment
-        return redirect('donation_success')  # or wherever you'd like
+        # Process one-time donation form data and handle payment
+        return redirect('donation_success')
     return render(request, 'one_time_donation_form.html')
 
 def recurring_donation_form(request):
     if request.method == 'POST':
-        # Process form data & handle payment
-        return redirect('donation_success')
-    return render(request, 'recurring_donation_form.html')
+        form = RecurringDonationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Thank you for setting up your recurring donation!")
+            return redirect('recurring_donation_success')
+    else:
+        form = RecurringDonationForm()
+    return render(request, 'recurring_donation_form.html', {'form': form})
 
-
-
-from django.http import JsonResponse, HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-
-
+# Mpesa Payment Functions
 MPESA_CONSUMER_KEY = "BilJfQ6hQ84LOlTllFTMGZAFcRGKOCMmnqgGOqWA561AfxyM"
 MPESA_CONSUMER_SECRET = "3pyoY3xR86oS7CpRXG9dSt7SVqnAzidBkqZRpBMiZB4J9wvcSj5zA17DTtRA6emt"
 MPESA_SHORTCODE = "600000" 
 MPESA_COMMAND_ID = "CustomerPayBillOnline"  
 MPESA_BILL_REF = "Donation"  
-MPESA_API_BASE = "https://sandbox.safaricom.co.ke" 
+MPESA_API_BASE = "https://sandbox.safaricom.co.ke"
+
 def get_mpesa_access_token():
     """
     Generates an Mpesa access token using the Daraja API.
@@ -131,3 +137,137 @@ def mpesa_simulate_payment(request):
     else:
         return HttpResponse("Method not allowed", status=405)
 
+# PayPal Payment Functions
+def initiate_paypal_payment(request, donation_id):
+    try:
+        donation = Donation.objects.get(id=donation_id)
+        
+        # Generate a unique order ID
+        order_id = str(uuid.uuid4())
+        
+        # Create PayPal transaction record
+        transaction = PayPalTransaction.objects.create(
+            donation=donation,
+            paypal_order_id=order_id,
+            # For recurring donations, adjust accordingly:
+            amount=donation.monthly_amount if hasattr(donation, "monthly_amount") and donation.is_recurring else donation.amount,
+            status='pending'
+        )
+        
+        context = {
+            'amount': float(transaction.amount),
+            'description': f"Donation to {settings.SITE_NAME}",
+            'donation_id': donation_id,
+            'recurring': getattr(donation, "is_recurring", False),
+            'order_id': order_id
+        }
+        
+        return render(request, 'paypal_payment.html', context)
+    except Donation.DoesNotExist:
+        return JsonResponse({'error': 'Donation not found'}, status=404)
+
+@csrf_exempt
+@require_POST
+def process_paypal_payment(request):
+    try:
+        data = json.loads(request.body)
+        order_id = data.get('order_id')
+        payment_id = data.get('payment_id')
+        status = data.get('status')
+        
+        transaction = PayPalTransaction.objects.get(paypal_order_id=order_id)
+        # Update transaction details
+        transaction.paypal_payment_id = payment_id
+        transaction.status = status
+        transaction.payment_details = data
+        transaction.save()
+        
+        if status == 'completed':
+            donation = transaction.donation
+            donation.status = 'completed'
+            donation.save()
+            return JsonResponse({
+                'success': True,
+                'redirect_url': reverse('donation_success')
+            })
+        
+        return JsonResponse({
+            'success': False,
+            'error': 'Payment processing failed'
+        })
+    except PayPalTransaction.DoesNotExist:
+        return JsonResponse({'error': 'Transaction not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+@csrf_exempt
+@require_POST
+def paypal_webhook(request):
+    try:
+        data = json.loads(request.body)
+        event_type = data.get('event_type')
+        if event_type == 'PAYMENT.CAPTURE.COMPLETED':
+            order_id = data.get('resource', {}).get('custom_id')
+            payment_id = data.get('resource', {}).get('id')
+            try:
+                transaction = PayPalTransaction.objects.get(paypal_order_id=order_id)
+                transaction.paypal_payment_id = payment_id
+                transaction.status = 'completed'
+                transaction.payment_details = data
+                transaction.save()
+                donation = transaction.donation
+                donation.status = 'completed'
+                donation.save()
+            except PayPalTransaction.DoesNotExist:
+                pass
+        return JsonResponse({'success': True})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+# Process Recurring Donation
+def process_recurring_donation(request):
+    if request.method == "POST":
+        # Extract form data from POST request
+        amount = request.POST.get("amount")
+        frequency = request.POST.get("frequency")
+        payment_method = request.POST.get("payment_method")
+        mpesa_number = request.POST.get("mpesa_number") if payment_method == "mpesa" else None
+        paypal_email = request.POST.get("paypal_email") if payment_method == "paypal" else None
+        card_number = request.POST.get("card_number") if payment_method == "card" else None
+        expiry = request.POST.get("expiry") if payment_method == "card" else None
+        cvv = request.POST.get("cvv") if payment_method == "card" else None
+
+        # Create a RecurringDonation record
+        donation = RecurringDonation.objects.create(
+            amount=amount,
+            frequency=frequency,
+            payment_method=payment_method,
+            mpesa_number=mpesa_number,
+            paypal_email=paypal_email,
+            card_number=card_number,
+            expiry_date=expiry,
+            cvv=cvv,
+        )
+
+        # Route based on the selected payment method
+        if payment_method == "mpesa":
+            return redirect("mpesa_payment", donation_id=donation.id)
+        elif payment_method == "paypal":
+            # Create a unique order ID for PayPal
+            order_id = str(uuid.uuid4())
+
+            # Build the context for the PayPal payment page
+            context = {
+                "amount": donation.amount,
+                "description": f"Recurring donation to {getattr(settings, 'SITE_NAME', 'My Donation Site')}",
+                "donation_id": donation.id,
+                "order_id": order_id,
+                "recurring": True,
+            }
+
+            return render(request, "paypal_payment.html", context)
+        elif payment_method == "card":
+            return redirect("card_payment", donation_id=donation.id)
+
+    # For GET requests, simply show the recurring donation form
+    return render(request, "recurring_donation.html")

@@ -1,0 +1,351 @@
+/* ================== GENERAL STYLES ================== */
+body, * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Gothic A1', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  /* Remove any margin under the navbar if needed */
+  .navbar {
+    margin-bottom: 0 !important;
+  }
+  
+ 
+/* ================== HERO SECTION ================== */
+#hero {
+    background-color: #2D6619;
+    padding: 5rem 0;
+    min-height: auto;
+    margin-bottom: 0px;  /* Provides enough vertical space */
+  }
+  #hero .container-fluid {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  #hero h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  #hero .lead {
+    font-size: 1.25rem;
+    color: #fff;
+    margin-bottom: 2rem;
+  }
+  /* Top CTA Button */
+  .cta-button-partner {
+    margin-bottom: 2rem;
+  }
+  /* Bottom CTA Buttons */
+  .cta-buttons-bottom {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    margin-top: 2rem;
+  }
+  
+  /* ================== HERO CARD STYLES ================== */
+  .hero-card {
+    width: 100%;
+    height: 250px;
+    /*Fixeddimensionsforeachcard*/border: 2px solid #FF5722;
+    /*Deeporangeborder*/border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px #FF5722;
+    transition: transform 0.3s ease;
+    margin-bottom: 1rem;
+    -webkit-transition: transform 0.3s ease;
+    -moz-transition: transform 0.3s ease;
+    -ms-transition: transform 0.3s ease;
+    -o-transition: transform 0.3s ease;
+}
+  .hero-card:hover {
+    transform: scale(1.05);
+  }
+  .hero-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* ================== RESPONSIVE DESIGN ================== */
+  /* Up to 1200px */
+  @media (max-width: 1200px) {
+    #hero h1 {
+      font-size: 2.2rem;
+    }
+    #hero .lead {
+      font-size: 1.2rem;
+    }
+  }
+  
+  /* Up to 992px */
+  @media (max-width: 992px) {
+    .service-card {
+      margin-bottom: 1.5rem;
+    }
+  }
+  
+  /* Up to 768px */
+  @media (max-width: 768px) {
+    #hero h1 {
+      font-size: 2rem;
+    }
+    #hero .lead {
+      font-size: 1rem;
+    }
+    .cta-buttons-bottom {
+      flex-direction: column;
+    }
+  }
+  
+  /* Up to 480px */
+  @media (max-width: 480px) {
+    #hero {
+      padding: 3rem 0;
+    }
+    #hero h1 {
+      font-size: 1.8rem;
+    }
+    #hero .lead {
+      font-size: 0.95rem;
+    }
+  }
+  
+  /* Up to 360px */
+  @media (max-width: 360px) {
+    #hero h1 {
+      font-size: 1.6rem;
+    }
+    #hero .lead {
+      font-size: 0.85rem;
+    }
+  }
+  
+  /* ~300px */
+  @media (max-width: 300px) {
+    #hero h1 {
+      font-size: 1.4rem;
+    }
+    #hero .lead {
+      font-size: 0.8rem;
+    }
+  }
+  
+  /* ================== SERVICES SECTION ================== */
+.services {
+    padding: 1rem 0;
+    background-color:#2D6619;
+    margin-top: 0px;
+  }
+  
+  .services h2 {
+    margin-bottom: 2rem;
+    color:white;
+  }
+  
+  /* Fixed, uniform service cards */
+  .service-card {
+    /* Make all cards a fixed height */
+    height: 400px;  
+    width: 100%;  /* Occupies full width of its grid column */
+    overflow: hidden;  /* Hide overflow if content is too long */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    transition: transform 0.3s ease;
+    padding: 1rem;
+
+  }
+  
+  /* Constrain the image to a fixed height */
+  .service-card img {
+    height: 150px;    /* Fixed image height */
+    width: 100%;      /* Ensure image spans the card width */
+    object-fit: cover; /* Crop image if needed to fill area */
+    border-radius: 5px; /* Optional: slight rounding on the image */
+    margin-bottom: 1rem;
+  }
+  
+  /* Ensure headings and paragraphs are sized consistently */
+  .service-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color:#fbd500;
+  }
+  .service-card p {
+    font-size:15px;
+    flex-grow: 1;      /* Take remaining vertical space */
+    overflow: hidden;  /* Hide overflowing text */
+    color: #2D6619;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    
+
+  }
+  
+  /* ================== AWARDS SECTION ================== */
+.awards {
+    padding: 3rem 0;
+    background-color:#2D6619;
+  }
+  
+  .awards h2 {
+    margin-bottom: 1.5rem;
+    color:#ffffff;
+  }
+  
+  .awards p {
+    margin-bottom: 2rem;
+    color:#ffffff;
+
+  }
+  
+  /* Award Card Styles */
+  .award-card {
+    border: 2px solid #FF5722;  /* Deep orange border */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #dedede;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .award-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(255, 87, 34, 0.8);
+  }
+  
+  .award-card img {
+    width: 100%;
+    height: 200px;        /* Fixed image height */
+    object-fit: cover;    /* Ensures the image covers the card area */
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .award-title {
+    font-size: 1rem;
+    color: #333332;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  
+  /* Carousel Adjustments */
+  #awardsCarousel .carousel-item {
+    padding: 1rem 0;
+  }
+  
+  /* Optional: Remove bottom margin on the last item in the row */
+  .row > [class*='col-']:last-child .award-card {
+    margin-bottom: 0;
+  }
+  
+  /* Responsive Adjustments for Award Cards */
+  @media (max-width: 768px) {
+    .award-card img {
+      height: 150px;
+    }
+    .award-title {
+      font-size: 0.9rem;
+    }
+  }
+  
+  
+  /* ================== TEAM SECTION ================== */
+  .team {
+    padding: 3rem 0;
+    background-color: #2D6619;
+    color:white;
+
+  }
+  
+  .team h2 {
+    margin-bottom: 1rem;
+    font-weight:bold;
+    color:white;
+  }
+  
+  .team .lead {
+    margin-bottom: 2rem;
+    color:white;
+  }
+  
+  /* ================== RESPONSIVE DESIGN ================== */
+ 
+  /* ============ Up to 1200px ============ */
+  @media (max-width: 1200px) {
+    #hero h1 {
+      font-size: 2.2rem;
+    }
+    #hero .lead {
+      font-size: 1.2rem;
+    }
+  }
+  
+  /* ============ Up to 992px (Tablet Landscape) ============ */
+  @media (max-width: 992px) {
+    /* Example: Adjust service cards spacing */
+    .service-card {
+      margin-bottom: 1.5rem;
+    }
+  }
+  
+  /* ============ Up to 768px (Tablet Portrait) ============ */
+  @media (max-width: 768px) {
+    #hero h1 {
+      font-size: 2rem;
+    }
+    #hero .lead {
+      font-size: 1rem;
+    }
+    .cta-buttons {
+      flex-direction: column;
+    }
+  }
+  
+  /* ============ Up to 480px (Large Phones) ============ */
+  @media (max-width: 480px) {
+    #hero {
+      padding: 3rem 0;
+    }
+    #hero h1 {
+      font-size: 1.8rem;
+    }
+    #hero .lead {
+      font-size: 0.95rem;
+    }
+  }
+  
+  /* ============ Up to 360px (Small Phones) ============ */
+  @media (max-width: 360px) {
+    #hero h1 {
+      font-size: 1.6rem;
+    }
+    #hero .lead {
+      font-size: 0.85rem;
+    }
+  }
+  
+  /* ============ ~300px (Extra-Small Phones) ============ */
+  @media (max-width: 300px) {
+    #hero h1 {
+      font-size: 1.4rem;
+    }
+    #hero .lead {
+      font-size: 0.8rem;
+    }
+  }
+  

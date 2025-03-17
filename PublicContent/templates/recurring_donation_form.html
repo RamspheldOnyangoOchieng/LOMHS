@@ -1,17 +1,113 @@
 {% extends "base.html" %}
 {% load static %}
-{% block content %}
-<div class="container">
-  <h2>Recurring Donation</h2>
-  <form method="POST">
-    {% csrf_token %}
-    <div class="mb-3">
-      <label for="monthly_amount" class="form-label">Monthly Donation Amount</label>
-      <input type="number" name="monthly_amount" id="monthly_amount" class="form-control" required>
-    </div>
-    <!-- Additional fields for setting up recurring payments -->
+{% block title %}Recurring Donation{% endblock %}
 
-    <button type="submit" class="btn btn-primary">Set Up Monthly Donation</button>
-  </form>
+{% block content %}
+<div class="container ">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 class="text-center mb-4">Recurring Donation</h2>
+      <p class="text-center text-muted">Help us continue our work by setting up a recurring donation.</p>
+      <form action="{% url 'process_recurring_donation' %}" method="POST">
+        {% csrf_token %}
+        
+        <!-- Donation Amount -->
+        <div class="mb-3">
+          <label for="amount" class="form-label fw-bold">Donation Amount (KES/USD):</label>
+          <input type="number" name="amount" id="amount" class="form-control" placeholder="Enter amount" min="1" required>
+        </div>
+        
+        <!-- Donation Frequency -->
+        <div class="mb-3">
+          <label for="frequency" class="form-label fw-bold">Donation Frequency:</label>
+          <select name="frequency" id="frequency" class="form-select" required>
+            <option value="weekly">Weekly</option>
+            <option value="monthly" selected>Monthly</option>
+            <option value="yearly">Yearly</option>
+          </select>
+        </div>
+        
+        <!-- Payment Method Selection -->
+        <div class="mb-3">
+          <p class="fw-bold mb-2">Select Payment Method:</p>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="payment_method" id="mpesa" value="mpesa" onclick="togglePaymentOptions()" required>
+            <label class="form-check-label" for="mpesa">M-Pesa</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="payment_method" id="paypal" value="paypal" onclick="togglePaymentOptions()">
+            <label class="form-check-label" for="paypal">PayPal</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="payment_method" id="card" value="card" onclick="togglePaymentOptions()">
+            <label class="form-check-label" for="card">Credit/Debit Card</label>
+          </div>
+        </div>
+        
+        <!-- M-Pesa Payment Section -->
+        <div id="mpesa_section" class="mb-3" style="display: none;">
+          <label for="mpesa_number" class="form-label">M-Pesa Phone Number:</label>
+          <input type="text" name="mpesa_number" id="mpesa_number" class="form-control" placeholder="e.g. 0712345678">
+        </div>
+        
+        <!-- PayPal Payment Section -->
+        <div id="paypal_section" class="mb-3" style="display: none;">
+          <p>You will be redirected to PayPal to set up your subscription.</p>
+          <!-- Optionally, you can include a field if you need to capture a PayPal-associated email -->
+          <label for="paypal_email" class="form-label">PayPal Email (optional):</label>
+          <input type="email" name="paypal_email" id="paypal_email" class="form-control" placeholder="you@example.com">
+        </div>
+        
+        <!-- Card Payment Section -->
+        <div id="card_section" style="display: none;">
+          <div class="mb-3">
+            <label for="card_number" class="form-label">Card Number:</label>
+            <input type="text" name="card_number" id="card_number" class="form-control" placeholder="1234 5678 9012 3456">
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="expiry" class="form-label">Expiry Date:</label>
+              <input type="month" name="expiry" id="expiry" class="form-control">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="cvv" class="form-label">CVV:</label>
+              <input type="text" name="cvv" id="cvv" class="form-control" placeholder="3 or 4 digits">
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center">
+          <button type="submit" class="btn btn-warning mt-3">Donate Now</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
-{% endblock %}
+
+<script>
+  function togglePaymentOptions(){
+    var paymentMethods = document.getElementsByName('payment_method');
+    var mpesaSection = document.getElementById('mpesa_section');
+    var paypalSection = document.getElementById('paypal_section');
+    var cardSection = document.getElementById('card_section');
+
+    // Hide all payment sections
+    mpesaSection.style.display = 'none';
+    paypalSection.style.display = 'none';
+    cardSection.style.display = 'none';
+
+    // Display the section for the selected payment method
+    for(var i = 0; i < paymentMethods.length; i++){
+      if(paymentMethods[i].checked){
+        if(paymentMethods[i].value === 'mpesa'){
+          mpesaSection.style.display = 'block';
+        } else if(paymentMethods[i].value === 'paypal'){
+          paypalSection.style.display = 'block';
+        } else if(paymentMethods[i].value === 'card'){
+          cardSection.style.display = 'block';
+        }
+      }
+    }
+  }
+</script>
+{% endblock content %}

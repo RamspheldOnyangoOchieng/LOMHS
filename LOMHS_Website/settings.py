@@ -12,6 +12,28 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# M-Pesa Credentials and Configuration
+MPESA_CONSUMER_KEY = os.getenv('MPESA_CONSUMER_KEY')
+MPESA_CONSUMER_SECRET = os.getenv('MPESA_CONSUMER_SECRET')
+MPESA_SHORTCODE = os.getenv('MPESA_SHORTCODE', '600000')  # default to sandbox shortcode if not provided
+MPESA_ENVIRONMENT = os.getenv('MPESA_ENVIRONMENT', 'sandbox')
+
+if MPESA_ENVIRONMENT.lower() == 'sandbox':
+    MPESA_API_BASE = "https://sandbox.safaricom.co.ke"
+else:
+    MPESA_API_BASE = "https://api.safaricom.co.ke"
+
+# Optionally, define a callback URL for Mpesa transaction notifications
+# Make sure this URL is publicly accessible and added to your Mpesa app settings on the Safaricom Developer portal.
+#MPESA_CALLBACK_URL = os.getenv('MPESA_CALLBACK_URL', 'https://your-domain.com/mpesa/callback/')
+
+# Ensure your ALLOWED_HOSTS include your domain when in production
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'your-domain.com']
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +61,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'PublicContent',
+    'django_daraja',
+    'payments',
     
 ]
 
@@ -118,7 +142,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 STATIC_URL = '/static/'
+STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'static'),
 ]
